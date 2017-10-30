@@ -1,0 +1,41 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Are you a co-maker or endorser on a note?</h2>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('coMakerOnNote')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Are you a co-maker or endorser on a note?</legend>
+    <label for="yes" class="radio">
+      <input
+        type="radio"
+        id="yes"
+        name="coMakerOnNote"
+        value="yes"
+        formControlName="coMakerOnNote"
+        [regionsAccessibleAttributes]="form.get('coMakerOnNote')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      Yes<span class="sr-only">, I am a co-maker or endorser on a note.</span>
+    </label>
+    <label for="no" class="radio">
+      <input type="radio" id="no" name="coMakerOnNote" value="no" formControlName="coMakerOnNote">
+      <span class="radio-btn" aria-hidden="true"></span>
+      No<span class="sr-only">, I am not a co-maker or endorser on a note.</span>
+    </label>
+    <span
+      id="yes-error"
+      class="error-text error-required"
+      *ngIf="form.get('coMakerOnNote').hasError('required')"
+    >select an option</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

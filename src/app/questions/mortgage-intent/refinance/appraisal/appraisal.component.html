@@ -1,0 +1,44 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">
+    <label for="appraisal">
+      What is your property worth?
+      <span class="sr-only">This can be an estimate for now.</span>
+    </label>
+  </h2>
+  <p class="sub-text">This can be an estimate for now.</p>
+  <fieldset>
+    <legend class="sr-only">What is your property worth?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('appraisal')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="appraisal"
+        name="appraisal"
+        formControlName="appraisal"
+        [regionsAccessibleAttributes]="form.get('appraisal')"
+        [formSubmitObservable]="formSubmitAttempted$"
+        (focusout)="formatAppraisal()"
+     >
+      <span
+        id="appraisal-error"
+        class="error-text error-required"
+        *ngIf="form.get('appraisal').hasError('required')"
+      >
+        appraisal is required
+      </span>
+      <span
+        id="appraisal-error"
+        class="error-text error-pattern"
+        *ngIf="!form.get('appraisal').hasError('required') && form.get('appraisal').hasError('pattern')"
+      >
+        appraisal must be number/currency
+      </span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

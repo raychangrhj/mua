@@ -1,0 +1,41 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Do you have a signed sales contract?</h2>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('locationPicked')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Do you have a signed sales contract?</legend>
+    <label for="yes" class="radio">
+      <input
+        type="radio"
+        id="yes"
+        name="locationPicked"
+        value="yes"
+        formControlName="locationPicked"
+        [regionsAccessibleAttributes]="form.get('locationPicked')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      Yes<span class="sr-only"> I have a signed sales contract.</span>
+    </label>
+    <label for="no" class="radio">
+      <input type="radio" id="no" name="locationPicked" value="no" formControlName="locationPicked">
+      <span class="radio-btn" aria-hidden="true"></span>
+      No<span class="sr-only"> I do not have a signed sales contract.</span>
+    </label>
+    <span
+      id="yes-error"
+      class="error-text error-required"
+      *ngIf="form.get('locationPicked').hasError('required')"
+    >selection is required</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

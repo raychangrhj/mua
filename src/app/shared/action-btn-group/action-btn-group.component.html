@@ -1,0 +1,52 @@
+<ng-content></ng-content>
+<a
+  *ngIf="options?.cancel"
+  class="btn btn-secondary btn-reject"
+
+  [queryParams]="options?.cancel?.link?.queryParams"
+  [fragment]="options?.cancel?.link?.fragment"
+  [queryParamsHandling]="options?.cancel?.link?.queryParamsHandling"
+  [preserveFragment]="options?.cancel?.link?.preserveFragment"
+  [skipLocationChange]="options?.cancel?.link?.skipLocationChange"
+  [replaceUrl]="options?.cancel?.link?.replaceUrl"
+  [routerLink]="options?.cancel?.link?.routerLink"
+
+>{{options?.cancel?.text}}</a>
+<a
+  *ngIf="options?.back"
+  class="btn btn-secondary btn-back"
+
+  [queryParams]="options?.back?.link?.queryParams"
+  [fragment]="options?.back?.link?.fragment"
+  [queryParamsHandling]="options?.back?.link?.queryParamsHandling"
+  [preserveFragment]="options?.back?.link?.preserveFragment"
+  [skipLocationChange]="options?.back?.link?.skipLocationChange"
+  [replaceUrl]="options?.back?.link?.replaceUrl"
+  [routerLink]="options?.back?.link?.routerLink"
+
+>{{options?.back?.text}}</a>
+<button
+  *ngIf="options?.next"
+  class="btn btn-primary btn-next"
+  type="submit"
+  [disabled]="!valid"
+>{{options?.next}}</button>
+<button
+  *ngIf="options?.save"
+  class="btn btn-primary btn-accept"
+  type="submit"
+  [disabled]="!valid"
+>{{options?.save}}</button>
+<a
+  *ngIf="options?.saveAndExit"
+  class="exit-link"
+
+  [queryParams]="options?.saveAndExit?.link?.queryParams"
+  [fragment]="options?.saveAndExit?.link?.fragment"
+  [queryParamsHandling]="options?.saveAndExit?.link?.queryParamsHandling"
+  [preserveFragment]="options?.saveAndExit?.link?.preserveFragment"
+  [skipLocationChange]="options?.saveAndExit?.link?.skipLocationChange"
+  [replaceUrl]="options?.saveAndExit?.link?.replaceUrl"
+  [routerLink]="options?.saveAndExit?.link?.routerLink"
+
+>{{options?.saveAndExit?.text}}</a>

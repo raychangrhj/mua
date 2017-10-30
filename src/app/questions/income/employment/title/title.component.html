@@ -1,0 +1,34 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub" *ngIf="currentEmployment && currentEmployment.companyName">
+    <label for="title">What do you do at {{currentEmployment.companyName}}?</label>
+  </h2>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub" *ngIf="!(currentEmployment && currentEmployment.companyName)">
+    <label for="title">What do you do at {{companyName$ | async}}?</label>
+  </h2>
+  <fieldset>
+    <legend *ngIf="currentEmployment && currentEmployment.companyName" class="sr-only">What do you do at {{currentEmployment.companyName}}?</legend>
+    <legend *ngIf="!(currentEmployment && currentEmployment.companyName)" class="sr-only">What do you do at {{companyName$ | async}}?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('title')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="title"
+        name="title"
+        formControlName="title"
+        [regionsAccessibleAttributes]="form.get('title')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        id="title-error"
+        class="error-text error-required"
+        *ngIf="form.get('title').hasError('required')"
+      >title is required</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

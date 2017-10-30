@@ -1,0 +1,77 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">What is your name?</h2>
+  <p class="sub-text">Please provide your legal name.</p>
+  <fieldset>
+    <legend class="sr-only">What is your name?</legend>
+    <div class="input-group input-group-first" [regionsInputGroup]="form.get('first')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="first-name" class="required">First Name</label>
+      <input
+        type="text"
+        id="first-name"
+        name="first"
+        formControlName="first"
+        [regionsAccessibleAttributes]="form.get('first')"
+				[formSubmitObservable]="formSubmitAttempted$"
+       [formSubmitObservable]="formSubmitAttempted$"
+      >
+      <span
+        class="error-text error-required"
+        id="first-name-error"
+        [hidden]="!(form.get('first').hasError('required'))"
+        *ngIf="form.get('first').hasError('required')"
+      >first name is required</span>
+    </div>
+    <div class="input-group">
+      <label for="middle-name">Middle Name (optional)</label>
+      <input
+        type="text"
+        id="middle-name"
+        name="middle"
+        formControlName="middle"
+      >
+    </div>
+    <div class="input-group input-group-last" [regionsInputGroup]="form.get('last')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="last-name" class="required">Last Name</label>
+      <input
+        type="text"
+        id="last-name"
+        name="last"
+        formControlName="last"
+        [regionsAccessibleAttributes]="form.get('last')"
+				[formSubmitObservable]="formSubmitAttempted$"
+       [formSubmitObservable]="formSubmitAttempted$"
+      >
+      <span
+        class="error-text error-required"
+        id="last-name-error"
+        *ngIf="form.get('last').hasError('required')"
+      >last name is required</span>
+    </div>
+    <div class="input-group">
+      <label for="suffix">Suffix (optional)</label>
+      <div class="select-wrapper">
+        <select
+          id="suffix"
+          name="suffix"
+          formControlName="suffix"
+          [regionsAccessibleAttributes]="form.get('suffix')"
+          [formSubmitObservable]="formSubmitAttempted$"
+        >
+          <option value="null">Please select</option>
+          <option *ngFor="let option of nameTypes | keysToArray" [value]="option.key">{{option.value}}</option>
+        </select>
+      </div>
+
+      <!-- Original code
+      <label for="suffix">Suffix (optional)</label>
+      <input type="text" id="suffix" name="suffix" placeholder="" formControlName="suffix">-->
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

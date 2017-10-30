@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">
+    <label for="amount">How much is the gift?</label>
+  </h2>
+  <fieldset>
+    <legend class="sr-only">How much is the gift?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('amount')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="amount"
+        name="amount"
+        formControlName="amount"
+        [regionsAccessibleAttributes]="form.get('amount')"
+        [formSubmitObservable]="formSubmitAttempted$"
+        (focusout)="formatAmount()"
+     />
+      <span
+        class="error-text error-required"
+        id="amount-error"
+        *ngIf="form.get('amount').hasError('required')"
+      >amount is required</span>
+      <span
+        class="error-text error-pattern"
+        id="amount-error"
+        *ngIf="!form.get('amount').hasError('required') && form.get('amount').hasError('pattern')"
+      >amount must be a number or currency</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

@@ -1,0 +1,39 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">
+    <label for="income">
+      How much do you make per month?
+      <span class="sr-only">Please enter your gross (pre-tax) amount</span>
+    </label>
+  </h2>
+  <p class="sub-text">Please enter your gross (pre-tax) amount</p>
+  <fieldset>
+    <legend class="sr-only">How much do you make per month?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('income')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="income"
+        name="income"
+        formControlName="income"
+        [regionsAccessibleAttributes]="form.get('income')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        id="error-income"
+        class="error-text error-required"
+        *ngIf="form.get('income').hasError('required')"
+      >income is required</span>
+      <span
+        id="error-income"
+        class="error-text error-pattern"
+        *ngIf="!form.get('income').hasError('required') && form.get('income').hasError('pattern')"
+      >income must be number/currency</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

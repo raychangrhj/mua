@@ -1,0 +1,20 @@
+<form (ngSubmit)="onSubmit()">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <div class="location-image">
+    <!-- TODO add in image here -->
+  </div>
+  <div class="address">
+    <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Is this correct?</h2>
+    <p class="address-information">
+      {{propertyLocation?.street}}<br />
+      {{propertyLocation?.unit}}<br *ngIf="propertyLocation?.unit" />
+      {{propertyLocation?.city}}, {{propertyLocation?.state}} {{propertyLocation?.zip}}
+    </p>
+  </div>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

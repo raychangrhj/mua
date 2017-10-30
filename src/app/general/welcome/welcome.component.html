@@ -1,0 +1,23 @@
+<div class="question-progress-bar" *ngIf="isCoBorrower$ | async">
+  <h1 class="section-title">Co-Borrower</h1>
+</div>
+<h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text welcome">Welcome!</h2>
+<p class="sub-text">{{options?.description}}</p>
+<div *ngIf="options?.requirements" class="requirements">
+  <p class="sub-text">You will need to have the following information handy:</p>
+  <div class="icon-group-container">
+    <div *ngFor="let requirement of options?.requirements; index as i;" [ngClass]="'requirement-' + i" class="icon-container">
+      <img [src]="requirement.imgSrc" [alt]="requirement.altText">
+      <p class="icon-label">{{requirement.title}}</p>
+    </div>
+  </div>
+</div>
+<div *ngIf="options?.gettingStartedLink" class="btn-container">
+  <a [routerLink]="options?.gettingStartedLink" class="btn btn-primary btn-continue">Get Started!</a>
+</div>
+<div *ngIf="options?.continueLink" class="continue">
+  <p class="sub-text">Already started your application? Pick up where you left off below.</p>
+  <div class="btn-container">
+    <a [routerLink]="options?.continueLink" class="btn btn-secondary btn-continue">Continue</a>
+  </div>
+</div>

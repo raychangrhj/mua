@@ -1,0 +1,34 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub"><label for="monthly">How much do you receive per month?</label></h2>
+  <fieldset>
+    <legend class="sr-only">How much do you receive per month?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('monthly')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="monthly"
+        name="monthly"
+        formControlName="monthly"
+        [regionsAccessibleAttributes]="form.get('monthly')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        id="monthly-error"
+        class="error-text error-required"
+        *ngIf="form.get('monthly').hasError('required')"
+      >monthly income required</span>
+      <span
+        id="monthly-error"
+        class="error-text error-pattern"
+        *ngIf="!form.get('monthly').hasError('required') && form.get('monthly').hasError('pattern')"
+      >monthly income must be number/currency</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    *ngIf="actionBtnLinkOptions"
+    [linkOptions]="actionBtnLinkOptions"
+  ></regions-action-btn-group>
+</form>

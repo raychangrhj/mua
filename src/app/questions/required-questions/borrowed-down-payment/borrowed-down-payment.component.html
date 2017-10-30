@@ -1,0 +1,43 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Is any part of the down payment borrowed?</h2>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('borrowedDownPayment')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Is any part of the down payment borrowed?</legend>
+    <label for="yes" class="radio">
+      <input
+        type="radio"
+        id="yes"
+        name="borrowedDownPayment"
+        value="yes"
+        formControlName="borrowedDownPayment"
+        [regionsAccessibleAttributes]="form.get('borrowedDownPayment')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      Yes<span class="sr-only">, some of the down payment is borrowed.</span>
+    </label>
+    <label for="no" class="radio">
+      <input type="radio" id="no" name="borrowedDownPayment" value="no" formControlName="borrowedDownPayment">
+      <span class="radio-btn" aria-hidden="true"></span>
+      No<span class="sr-only">, none of the down payment is borrowed.</span>
+    </label>
+    <span
+      class="error-text error-required"
+      *ngIf="form.get('borrowedDownPayment').hasError('required')"
+      id="yes-error"
+    >
+      select an option
+    </span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

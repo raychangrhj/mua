@@ -1,0 +1,43 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Are you a U.S. Citizen?</h2>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('usCitizen')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Are you a U.S. Citizen?</legend>
+    <label for="yes" class="radio">
+      <input
+        type="radio"
+        id="yes"
+        name="usCitizen"
+        value="yes"
+        formControlName="usCitizen"
+        [regionsAccessibleAttributes]="form.get('usCitizen')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      Yes<span class="sr-only">, I am a U.S. Citizen.</span>
+    </label>
+    <label for="no" class="radio">
+      <input type="radio" id="no" name="usCitizen" value="no" formControlName="usCitizen">
+      <span class="radio-btn" aria-hidden="true"></span>
+      No<span class="sr-only">, I am not a U.S. Citizen.</span>
+    </label>
+    <span
+      class="error-text error-required"
+      id="yes-error"
+      *ngIf="form.get('usCitizen').hasError('required')"
+    >
+      select an option
+    </span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

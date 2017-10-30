@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">
+    Have you directly or indirectly been obligated on any loan which resulted in foreclosure, transfer of title in lieu of foreclosure, or judgments?
+  </h2>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('foreclosureJudgements')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Have you directly or indirectly been obligated on any loan which resulted in foreclosure, transfer of title in lieu of foreclosure, or judgments?</legend>
+    <label for="yes" class="radio">
+      <input
+        type="radio"
+        id="yes"
+        name="foreclosureJudgements"
+        value="yes"
+        formControlName="foreclosureJudgements"
+        [regionsAccessibleAttributes]="form.get('foreclosureJudgements')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      Yes<span class="sr-only">, I have been directly or indirectly obligated on a loan which resulted in foreclosure, transfer of title in lieu of foreclosure, or judgments.</span>
+    </label>
+    <label for="no" class="radio">
+      <input type="radio" id="no" name="foreclosureJudgements" value="no" formControlName="foreclosureJudgements">
+      <span class="radio-btn" aria-hidden="true"></span>
+      No<span class="sr-only">, I have not been directly or indirectly obligated on a loan which resulted in foreclosure, transfer of title in lieu of foreclosure, or judgments.</span>
+    </label>
+    <span
+      id="yes-error"
+      class="error-text error-required"
+    >select an option</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

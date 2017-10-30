@@ -1,0 +1,66 @@
+@import "../../../scss/variables";
+
+:host {
+  display: block;
+  width: 100%;
+  background: white;
+}
+
+.logo {
+  margin: 10px 20px;
+}
+
+.regions-app-heading {
+  display: block;
+  font-size: 34px;
+  color: white;
+  font-family: $main-font;
+  font-weight: 400;
+  margin: 0;
+  padding: 28px 0 28px 20px;
+  background: $regions-green;
+  letter-spacing: 1px;
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    background: $regions-green;
+    height: 98px;
+    top: 83px;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: $small-max-width) {
+  .logo {
+    display: block;
+    width: 101px;
+    margin: 6px auto 0;
+  }
+}
+@media screen and (max-width: $small-max-width) {
+  .regions-app-heading {
+    display: none;
+  }
+}
+
+@media screen and (min-width: $small-max-width + 1) {
+  :host::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background: $regions-light-green;
+    height: 54px;
+    top: 181px;
+    left: 0;
+  }
+  header a {
+    height: 83px;
+  }
+  
+  .logo {
+    margin: 3px 0 25px 20px;
+  }
+}

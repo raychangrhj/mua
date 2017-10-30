@@ -1,0 +1,68 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">Resuming your application</h2>
+  <p class="sub-text">Please enter the following information to resume your application.</p>
+  <fieldset>
+    <legend class="sr-only">Resuming your application</legend>
+    <div class="input-group input-group-email" [regionsInputGroup]="form.get('email')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="email" class="required">Email address</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        [regionsAccessibleAttributes]="form.get('email')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        class="error-text error-required"
+        id="email-error"
+        *ngIf="form.get('email').hasError('required')"
+      >email is required</span>
+      <span
+        class="error-text error-email"
+        id="email-error"
+        *ngIf="!form.get('email').hasError('required') && form.get('email').hasError('email')"
+      >format must be you@email.address</span>
+    </div>
+    <div class="input-group input-group-ssn" [regionsInputGroup]="form.get('ssn')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="ssn" class="required">Last 4 digits of social</label>
+      <input
+        type="number"
+        id="ssn"
+        formControlName="ssn"
+        [regionsAccessibleAttributes]="form.get('ssn')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        class="error-text error-required"
+        id="ssn-error"
+        *ngIf="form.get('ssn').hasError('required')"
+      >last 4 of ssn required</span>
+      <span
+        class="error-text error-pattern"
+        id="ssn-error"
+        *ngIf="!form.get('ssn').hasError('required') && form.get('ssn').hasError('pattern')"
+      >last 4 of ssn must be numbers</span>
+    </div>
+    <div class="input-group input-group-pin" [regionsInputGroup]="form.get('pin')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="pin" class="required">Security PIN</label>
+      <input
+        type="password"
+        id="pin"
+        formControlName="pin"
+        [regionsAccessibleAttributes]="form.get('pin')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        class="error-text error-required"
+        id="pin-error"
+        *ngIf="form.get('pin').hasError('required')"
+      >security pin is required</span>
+    </div>
+  </fieldset>
+  <div class="text-center">
+    <a routerLink="/resume-application/forgot-pin">I don't have a PIN</a>
+  </div>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

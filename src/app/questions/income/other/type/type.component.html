@@ -1,0 +1,51 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [pills]="pills$ | async"
+    [title]="pillsTitle$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub"><label for="option">What type of income is it?</label></h2>
+  <fieldset>
+    <legend class="sr-only">What type of income is it?</legend>
+    <div class="input-group input-group-option" [regionsInputGroup]="form.get('option')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <div class="select-wrapper">
+        <select
+          id="option"
+          name="option"
+          formControlName="option"
+          (change)="onChangeOfIncomeType()"
+          [regionsAccessibleAttributes]="form.get('option')"
+				  [formSubmitObservable]="formSubmitAttempted$"
+       >
+          <option value="null">Please Select</option>
+          <option *ngFor="let option of incomeTypes | keysToArray" [value]="option.key">{{option.value}}</option>
+        </select>
+      </div>
+      <span
+        id="option-error"
+        class="error-text error-required"
+        *ngIf="form.get('option').hasError('required')"
+      >income type is required</span>
+    </div>
+    <div class="input-group input-group-explain" *ngIf="form.controls['option'].value === 'other'" [regionsInputGroup]="form.get('explain')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="explain">
+        Please Explain<span class="sr-only"> what the other income is</span>
+      </label>
+      <input
+        type="text"
+        id="explain"
+        name="explain"
+        formControlName="explain"
+        [regionsAccessibleAttributes]="form.get('explain')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        id="explain-error"
+        class="error-text error-required"
+        *ngIf="form.get('explain').hasError('required')"
+      >income type is required</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

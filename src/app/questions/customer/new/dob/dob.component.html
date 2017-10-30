@@ -1,0 +1,39 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [pills]="pills$ | async"
+    [title]="pillsTitle$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">
+    <label for="dob">
+      What is your date of birth?
+      <span class="sr-only">Please enter MM/DD/YYYY</span>
+    </label>
+  </h2>
+  <p class="sub-text">Please enter MM/DD/YYYY</p>
+  <fieldset>
+    <legend class="sr-only">What is your date of birth?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('dob')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="dob"
+        name="dob"
+        formControlName="dob"
+        [regionsAccessibleAttributes]="form.get('dob')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        id="dob-error"
+        *ngIf="form.get('dob').hasError('required')"
+      >date of birth is required</span>
+      <span
+        class="error-text error-date"
+        id="dob-error"
+        *ngIf="form.get('dob').hasError('date')"
+      >please enter a valid date</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

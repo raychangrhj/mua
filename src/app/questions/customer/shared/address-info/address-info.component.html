@@ -1,0 +1,46 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">
+    <label for="address-start-date">
+      When did you start living at {{address?.street}}{{address?.unit ? ', ' + address?.unit : null}}, {{address?.city}}?
+    </label>
+  </h2>
+  <fieldset *ngIf="isCoBorrowerPage$ | async" id="is-same-as-borrower-fieldset">
+    <legend class="sr-only">Is your address start date the same as the borrowers?</legend>
+    <div class="input-group input-group-same-as-borrower">
+      <label for="same-as-borrower" class="checkbox">
+        <input type="checkbox" id="same-as-borrower" (change)="useBorrowerAddressInfo($event.currentTarget.checked)" /><span class="check-box" aria-hidden="true"></span> Same as borrower
+      </label>
+    </div>
+  </fieldset>
+  <p class="sub-text">Please enter MM/YYYY</p>
+  <fieldset>
+    <legend class="sr-only">When did you start living at {{address?.street}}{{address?.unit ? ', ' + address?.unit : null}}, {{address?.city}}?</legend>
+    <div class="input-group input-group-address-start-date" [regionsInputGroup]="form.get('addressStartDate')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="address-start-date"
+        name="addressStartDate"
+        formControlName="addressStartDate"
+        [regionsAccessibleAttributes]="form.get('addressStartDate')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        id="address-start-date-error"
+        *ngIf="form.get('addressStartDate').hasError('required')"
+      >address start date is required</span>
+      <span
+        class="error-text error-date"
+        id="address-start-date-error"
+        *ngIf="!form.get('addressStartDate').hasError('required') && form.get('addressStartDate').hasError('date')"
+      >please enter a valid date</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

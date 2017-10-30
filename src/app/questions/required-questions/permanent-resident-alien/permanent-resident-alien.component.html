@@ -1,0 +1,43 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Are you a permanent resident alien?</h2>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('permanentResidentAlien')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Are you a permanent resident alien?</legend>
+    <label for="yes" class="radio">
+      <input
+        type="radio"
+        id="yes"
+        name="permanentResidentAlien"
+        value="yes"
+        formControlName="permanentResidentAlien"
+        [regionsAccessibleAttributes]="form.get('permanentResidentAlien')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      Yes<span class="sr-only">, I am a permanent resident alien.</span>
+    </label>
+    <label for="no" class="radio">
+      <input type="radio" id="no" name="permanentResidentAlien" value="no" formControlName="permanentResidentAlien">
+      <span class="radio-btn" aria-hidden="true"></span>
+      No<span class="sr-only">, I am not a permanent resident alien.</span>
+    </label>
+    <span
+      class="error-text error-required"
+      id="yes-error"
+      *ngIf="form.get('permanentResidentAlien').hasError('required')"
+    >
+      select an option
+    </span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

@@ -1,0 +1,38 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub"><label for="loan-amount">How much would you like to borrow?</label></h2>
+  <fieldset>
+    <legend class="sr-only">How much would you like to borrow?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('loanAmount')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="loan-amount"
+        name="loanAmount"
+        formControlName="loanAmount"
+        [regionsAccessibleAttributes]="form.get('loanAmount')"
+        [formSubmitObservable]="formSubmitAttempted$"
+        (focusout)="formatLoanAmount()"
+     >
+      <span
+        id="loan-amount-error"
+        class="error-text error-required"
+        *ngIf="form.get('loanAmount').hasError('required')"
+      >
+        loan amount is required
+      </span>
+      <span
+        id="loan-amount-error"
+        class="error-text error-pattern"
+        *ngIf="!form.get('loanAmount').hasError('required') && form.get('loanAmount').hasError('pattern')"
+      >
+        loan amount must be number/currency
+      </span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

@@ -1,0 +1,60 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">
+    <label for="number">
+      What is your phone number?
+      <span class="sr-only">Please include an area code.</span>
+    </label>
+  </h2>
+  <p class="sub-text">Please include an area code.</p>
+  <fieldset>
+    <legend class="sr-only">>What is your phone number?</legend>
+    <div class="input-group input-group-number" [regionsInputGroup]="form.get('number')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="tel"
+        id="number"
+        name="number"
+        formControlName="number"
+        [regionsAccessibleAttributes]="form.get('number')"
+				[formSubmitObservable]="formSubmitAttempted$"
+        (focusout)="formatPhone()"
+      />
+      <span
+        class="error-text error-required"
+        id="number-error"
+        *ngIf="form.get('number').hasError('required')"
+      >phone number is required</span>
+      <span
+        class="error-text error-pattern"
+        id="number-error"
+        *ngIf="!form.get('number').hasError('required') && form.get('number').hasError('pattern')"
+      >please enter a valid phone number</span>
+    </div>
+    <div class="input-group input-group-type" [regionsInputGroup]="form.get('type')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="type">Number Type</label>
+      <div class="select-wrapper">
+        <select
+          id="type"
+          name="type"
+          formControlName="type"
+          [regionsAccessibleAttributes]="form.get('type')"
+				  [formSubmitObservable]="formSubmitAttempted$"
+       >
+          <option value="null">Please Select</option>
+          <option *ngFor="let option of phoneTypes | keysToArray" [value]="option.key">{{option.value}}</option>
+        </select>
+      </div>
+      <span
+        class="error-text error-required"
+        id="type-error"
+        *ngIf="form.get('type').hasError('required')"
+      >phone type is required</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

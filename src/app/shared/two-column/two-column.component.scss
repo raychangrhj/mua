@@ -1,0 +1,18 @@
+@import "../../../scss/variables";
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  @media screen and (max-width: 594px) {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: $small-max-width) {
+  :host {
+    position: relative;
+    padding-top: 54px;
+  }
+}

@@ -1,0 +1,40 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">
+    <label for="type">
+      What type of account do you have at {{bankName}}?
+      <span class="sr-only">You can add additional accounts later.</span>
+    </label>
+  </h2>
+  <p class="sub-text">You can add additional accounts later.</p>
+  <fieldset>
+    <legend class="sr-only">What type of account do you have at {{bankName}}?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('type')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <div class="select-wrapper">
+        <select
+          id="type"
+          name="type"
+          formControlName="type"
+          [regionsAccessibleAttributes]="form.get('type')"
+				  [formSubmitObservable]="formSubmitAttempted$"
+       >
+          <option value="null">Account Type</option>
+          <option *ngFor="let option of accountTypes | keysToArray" [value]="option.key">{{option.value}}</option>
+        </select>
+      </div>
+      <span
+        class="error-text error-required"
+        id="type-error"
+        *ngIf="form.get('type').hasError('required')"
+      >
+        account type is required
+      </span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

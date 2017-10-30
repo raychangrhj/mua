@@ -1,0 +1,41 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">How do you intend to use the property?</h2>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('primaryUse')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">How do you intend to use the property?</legend>
+    <label for="second-home" class="radio">
+      <input
+        type="radio"
+        id="second-home"
+        name="primaryUse"
+        value="second-home"
+        formControlName="primaryUse"
+        [regionsAccessibleAttributes]="form.get('primaryUse')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      2nd Home/Vacation
+    </label>
+    <label for="investment" class="radio">
+      <input type="radio" id="investment" name="primaryUse" value="investment" formControlName="primaryUse">
+      <span class="radio-btn" aria-hidden="true"></span>
+      Investment/Rental
+    </label>
+    <span
+      class="error-text error-required"
+      id="second-home-error"
+      *ngIf="form.get('primaryUse').hasError('required')"
+    >select an option</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

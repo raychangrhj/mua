@@ -1,0 +1,44 @@
+.dp-input-container {
+    display: flex;
+    margin-top: 16px;
+    max-width: 280px;
+    margin: 30px auto 0;
+}
+
+#down-payment-amount {
+    display: inline-block;
+    min-width: 0;
+    width: 116px;
+    text-align: center;
+    position: relative;
+    &:focus {
+        padding-left: 0;
+    }
+}
+
+#down-payment-percent {
+    display: inline-block;
+    min-width: 0;
+    width: 116px;
+    text-align: center;
+    position: relative;
+    &:focus {
+        padding-left: 0;
+    }
+}
+#dp-divider {
+    display: inline-block;
+    flex-grow: 1;
+    text-align: center;
+    &::after {
+        content: "%";
+        position: relative;
+        right: -116px;
+        z-index: 999;
+    }
+    &::before {
+        content: "$";
+        position: relative;
+        left: -116px;
+    }
+}

@@ -1,0 +1,33 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub"><label for="email">What is your email address?</label></h2>
+  <fieldset>
+    <legend class="sr-only">What is your email address?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('email')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="email"
+        id="email"
+        name="email"
+        formControlName="email"
+        [regionsAccessibleAttributes]="form.get('email')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        id="email-error"
+        *ngIf="form.get('email').hasError('required')"
+      >email is required</span>
+      <span
+        class="error-text error-email"
+        id="email-error"
+        *ngIf="!form.get('email').hasError('required') && form.get('email').hasError('email')"
+      >please enter a valid email address</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

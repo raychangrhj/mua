@@ -1,0 +1,32 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">
+    <label for="employer">Where <span class="second-job" *ngIf="!isFirstJob">else </span>do you work?</label>
+  </h2>
+  <fieldset>
+    <legend class="sr-only">Where <span class="second-job" *ngIf="!isFirstJob">else </span>do you work?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('employer')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="employer"
+        name="employer"
+        formControlName="employer"
+        [regionsAccessibleAttributes]="form.get('employer')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        class="error-text error-required"
+        id="employer-error"
+        *ngIf="form.get('employer').hasError('required')"
+      >
+        employer name is required
+      </span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

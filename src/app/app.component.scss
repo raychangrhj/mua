@@ -1,0 +1,9 @@
+@import "../scss/variables";
+
+:host {
+  display: block;
+  margin: 20px auto 0;
+  max-width: 900px;
+  min-width: 320px;
+  background: $page-background;
+}

@@ -1,0 +1,15 @@
+@import "variables";
+
+a {
+  color: $link-color;
+  text-decoration: none;
+}
+
+form a {
+  text-decoration: none;
+  font-size: 14px;
+}
+
+form a.btn {
+  text-decoration: none;
+}

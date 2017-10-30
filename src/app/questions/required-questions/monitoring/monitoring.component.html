@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit()">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">We collect the following information for Government Monitoring Purposes.</h2>
+  <p class="sub-text">
+    The purpose of collecting this information is to help ensure that all applicants are treated fairly and that the housing needs of communities and neighborhoods are being fulfilled.
+    For residential mortgage lending, Federal law requires we ask applicants for their demographic information (ethnicity, race, and sex) in order to monitor our compliance with equal credit opportunity, fair housing, and home mortgage disclosure laws.
+    You are not required to provide this information, but are encouraged to do so.
+    You may select one or more "Hispanic or Latino" origins, and one or more designations for "Race."
+  </p>
+  <p class="sub-text">
+    The law provides that we may not discriminate on the basis of this information, or on whether you choose to provide it.
+    However, if you choose not to provide the information and you have made this applications in person, Federal regulations require us to note your ethnicity, race, and sex on the basis of visual observation or surname.
+    If you do not wish to provide some or all of this information, please select "I do not wish to provide this information" on the following screens.
+  </p>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  >
+    <button type="submit" class="btn btn-primary btn-acknowledge">Acknowledge</button>
+  </regions-action-btn-group>
+</form>

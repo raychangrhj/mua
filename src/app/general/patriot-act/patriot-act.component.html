@@ -1,0 +1,13 @@
+<div class="question-progress-bar" *ngIf="isCoBorrower$ | async">
+  <h1 class="section-title">Co-Borrower</h1>
+</div>
+<h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">Patriot Act</h2>
+<p class="sub-text">To help the government fight the funding of terrorism and money laundering activities, federal law requires all financial institutions to obtain, verify, and record information that identifies each person who opens an account.</p>
+<hr />
+<h3>What this means for you:</h3>
+<p class="sub-text">When you open an account, we will ask for your name, address, date of birth, and other information that will allow us to identify you. We may also ask to see your driver's license or other identifying documents.</p>
+<regions-action-btn-group>
+  <button class="btn btn-primary btn-continue" [routerLink]="continueLink$ | async">
+    Acknowledge
+  </button>
+</regions-action-btn-group>

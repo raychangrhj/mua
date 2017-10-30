@@ -1,0 +1,61 @@
+@import "variables";
+
+div.answers-title {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #2A7D91;
+    padding-right: 2rem;
+    cursor: pointer;
+  
+    h3 {
+      display: inline-block;
+      position: relative;
+      left: 0;
+      margin: 0;
+      color: #2A7D91;
+      font-size: 16px;
+      font-weight: normal;
+    }
+  
+    .edit {
+      display: inline-block;
+      position: absolute;
+      bottom: 0;
+      right: 8px;
+      font-size: 12px;
+      color: #2A7D91;
+    }
+  }
+
+.add {
+    color: $regions-green;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 auto 16px;
+
+    &::before {
+        content: "+";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        line-height: 12px;
+        font-weight: bold;
+        margin-right: 10px;
+        border: 2px solid $regions-green;
+        padding: 2px;
+        border-radius: 50%;
+    }
+    &:hover {
+        color: $light-green;
+        &::before {
+            border-color: $light-green;
+        }
+    }
+  }
+  

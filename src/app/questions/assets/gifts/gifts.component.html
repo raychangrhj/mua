@@ -1,0 +1,63 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">
+    {{ !form.get('hasGifts')?.value ? 'Do you have any monetary gifts?' : 'Verify your monetary gifts.' }}
+  </h2>
+  <a [routerLink]="baseUrl + '/assets/gift/benefactor'" class="add">
+    add gift
+  </a>
+  <div *ngFor="let gift of displayGifts; index as i;">
+    <div
+      tabindex="0"
+      class="answers-title"
+      (keyup.enter)="removeGift(i)"
+      (click)="removeGift(i)"
+    >
+      <h3>{{gift?.title}}</h3>
+      <span class="edit">Delete</span>
+    </div>
+    <regions-confirm-answer
+      *ngFor="let answer of gift?.answers"
+      [title]="answer?.title"
+      [response]="answer?.response | async"
+      [type]="answer?.type"
+      [link]="answer?.returnLink"
+    ></regions-confirm-answer>
+  </div>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('noGifts')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Monetary Gifts</legend>
+    <label
+      *ngIf="!form.get('hasGifts')?.value"
+      for="no-gifts"
+      class="checkbox"
+    >
+      <input
+        *ngIf="!form.get('hasGifts')?.value"
+        type="checkbox"
+        id="no-gifts"
+        name="noGifts"
+        formControlName="noGifts"
+        [regionsAccessibleAttributes]="form.get('noGifts')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     /><span class="check-box" aria-hidden="true"></span> I will not have any monetary gifts.
+    </label>
+    <span
+      class="error-text error-required"
+      id="no-gifts-error"
+      *ngIf="form.get('noGifts').hasError('required')"
+    >checkbox or gift required</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  >
+    <button type="submit" class="btn btn-primary btn-continue">Confirm &amp; Continue</button>
+  </regions-action-btn-group>
+</form>

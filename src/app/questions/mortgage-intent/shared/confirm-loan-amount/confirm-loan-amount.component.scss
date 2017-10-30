@@ -1,0 +1,23 @@
+@import "../../../../../scss/variables";
+
+section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  &.total {
+    border-top: 1px solid $totals-row-top-border;
+    padding-top: 20px;
+  }
+
+  & > span, & > strong {
+    display: flex;
+  }
+}
+p.address, p.sales-price, p.down-payment, p.loan-amount {
+  margin-top: 0;
+  font-family: $main-font;
+  text-align: right;
+}

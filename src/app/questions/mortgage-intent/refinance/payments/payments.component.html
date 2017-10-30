@@ -1,0 +1,39 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">What is your monthly payment?</h2>
+  <fieldset>
+    <legend class="sr-only">What is your monthly payment?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('payment')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="payment" class="required">Monthly Payment</label>
+      <input
+        type="text"
+        id="payment"
+        name="payment"
+        formControlName="payment"
+        [regionsAccessibleAttributes]="form.get('payment')"
+        [formSubmitObservable]="formSubmitAttempted$"
+        (focusout)="formatPayment()"
+     >
+      <span
+        class="error-text error-required"
+        id="payment-error"
+        *ngIf="form.get('payment').hasError('required')"
+      >
+        monthly payment is required
+      </span>
+      <span
+        class="error-text error-pattern"
+        id="payment-error"
+        *ngIf="!form.get('payment').hasError('required') && form.get('payment').hasError('pattern')"
+      >
+        monthly payment must be a number/currency
+      </span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

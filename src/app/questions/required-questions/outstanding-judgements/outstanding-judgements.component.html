@@ -1,0 +1,40 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Are there any outstanding judgments against you?</h2>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('outstandingJudgements')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Are there any outstanding judgments against you?</legend>
+    <label for="yes" class="radio">
+      <input
+        type="radio"
+        id="yes"
+        name="outstandingJudgements"
+        value="yes"
+        formControlName="outstandingJudgements"
+        [regionsAccessibleAttributes]="form.get('outstandingJudgements')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      Yes<span class="sr-only">, I have outstanding judgments against me.</span>
+    </label>
+    <label for="no" class="radio">
+      <input type="radio" id="no" name="outstandingJudgements" value="no" formControlName="outstandingJudgements">
+      <span class="radio-btn" aria-hidden="true"></span>
+      No<span class="sr-only">, I do not have outstanding judgments against me.</span>
+    </label>
+    <span
+      id="yes-error"
+      class="error-text error-required"
+    >select an option</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

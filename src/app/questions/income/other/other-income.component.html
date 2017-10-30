@@ -1,0 +1,64 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">
+    {{ !form.get('hasIncomes')?.value ? 'Do you have other income?' : 'Verify your other income.' }}
+  </h2>
+  <p class="sub-text">This can be a pension, Social Security, rental income, etc.</p>
+  <p class="sub-text">Alimony, child support or separate maintenance income need not be revealed if you do not choose to have it considered for repaying this loan.</p>
+  <a [routerLink]="baseUrl + '/income/other-income/type'" class="add">
+    add income
+  </a>
+  <div *ngFor="let income of displayOtherIncomes; index as i;">
+    <div
+      tabindex="0"
+      class="answers-title"
+      (keyup.enter)="removeIncome(i)"
+      (click)="removeIncome(i)"
+    >
+      <h3>{{income?.title}}</h3>
+      <span class="edit">Delete</span>
+    </div>
+    <regions-confirm-answer
+      *ngFor="let answer of income?.answers"
+      [title]="answer?.title"
+      [response]="answer?.response | async"
+      [type]="answer?.type"
+      [link]="answer?.returnLink"
+    ></regions-confirm-answer>
+  </div>
+  <fieldset
+    aria-labelledby="page-heading"
+    class="input-group"
+    [regionsInputGroup]="form.get('noOtherIncome')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+  >
+    <label
+      *ngIf="!form.get('hasIncomes')?.value"
+      for="no-other-income"
+      class="checkbox"
+    >
+      <input
+        *ngIf="!form.get('hasIncomes')?.value"
+        type="checkbox"
+        id="no-other-income"
+        name="noOtherIncome"
+        formControlName="noOtherIncome"
+        [regionsAccessibleAttributes]="form.get('noOtherIncome')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     ><span class="check-box" aria-hidden="true"></span> I have no other income.
+    </label>
+    <span
+      id="no-other-income-error"
+      class="error-text error-required"
+      *ngIf="form.get('noOtherIncome').hasError('required')"
+    >other income or checkbox is required</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  >
+    <button type="submit" class="btn btn-primary btn-continue">Confirm &amp; Continue</button>
+  </regions-action-btn-group>
+</form>

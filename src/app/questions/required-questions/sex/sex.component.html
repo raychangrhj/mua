@@ -1,0 +1,40 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">What is your sex?</h2>
+  <p class="sub-text">You can select more than one option.</p>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('optOut')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+  >
+    <legend class="sr-only">What is your sex? You can select more than one option.</legend>
+    <label for="female" class="checkbox">
+      <input
+        type="checkbox"
+        id="female"
+        name="female"
+        formControlName="female"
+        [regionsAccessibleAttributes]="form.get('optOut')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     ><span class="check-box" aria-hidden="true"></span> Female
+    </label>
+    <label for="male" class="checkbox">
+      <input type="checkbox" id="male" name="male" formControlName="male"><span class="check-box" aria-hidden="true"></span> Male
+    </label>
+    <label for="optOut" class="checkbox">
+      <input type="checkbox" id="optOut" name="optOut" formControlName="optOut" (change)="optOutChange()"><span class="check-box" aria-hidden="true"></span> I do not wish to provide this information
+    </label>
+    <span
+      id="optOut-error"
+      class="error-text error-required"
+      *ngIf="form.get('optOut').hasError('required')">
+      select a sex or opt out
+    </span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

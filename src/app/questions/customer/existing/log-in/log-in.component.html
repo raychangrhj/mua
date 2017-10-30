@@ -1,0 +1,45 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Please log in.</h2>
+  <fieldset>
+    <legend class="sr-only">Please log in.</legend>
+    <div class="input-group input-group-username" [regionsInputGroup]="form.get('username')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="username" class="required">User Name</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        formControlName="username"
+        [regionsAccessibleAttributes]="form.get('username')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        id="username-error"
+        *ngIf="form.get('username').hasError('required')"
+      >username is required</span>
+    </div>
+    <div class="input-group input-group-password" [regionsInputGroup]="form.get('password')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="password" class="required">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        formControlName="password"
+        [regionsAccessibleAttributes]="form.get('password')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        id="password-error"
+        *ngIf="form.get('password').hasError('required')"
+      >password is required</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

@@ -1,0 +1,38 @@
+:host {
+  margin-bottom: 20px;
+  display: block;
+}
+
+.title {
+  color: #595959;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+a {
+  display: block;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #E0E0E0;
+  padding-right: 2rem;
+}
+
+.response {
+  display: inline-block;
+  position: relative;
+  left: 0;
+  margin: 0;
+  color: #000;
+  font-size: 16px;
+}
+
+.edit {
+  display: inline-block;
+  position: absolute;
+  bottom: 9px;
+  right: 8px;
+  color: #12728D;
+  font-size: 12px;
+}

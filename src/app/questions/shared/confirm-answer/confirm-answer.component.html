@@ -1,0 +1,17 @@
+<a [routerLink]="link">
+  <p class="title">{{title}}</p>
+  <p class="response" *ngIf="responseStr">{{responseStr}}</p>
+  <p class="response" *ngIf="responseCurrency">{{responseCurrency | currency:'USD':true:'1.0-2'}}</p>
+  <p class="response" *ngIf="responseName?.first && responseName?.last"><!--
+    -->{{responseName.first}}<!--
+    -->{{responseName.middle ? ' ' + responseName.middle : null}}<!--
+    -->{{responseName.last ? ' ' + responseName.last : null}}<!--
+    -->{{responseName.suffix ? ' ' + getSuffixDescription(responseName.suffix) : null}}<!--
+  --></p>
+  <p class="response" *ngIf="responseAddress?.street && responseAddress.city && responseAddress.state && responseAddress.zip">
+    {{responseAddress?.street}}<br />
+    {{responseAddress?.unit}}<br *ngIf="responseAddress?.unit" />
+    {{responseAddress?.city}}, {{responseAddress?.state}} {{responseAddress?.zip}}
+  </p>
+  <span *ngIf="link" class="edit">{{edit}}</span>
+</a>

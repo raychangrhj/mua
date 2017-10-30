@@ -1,0 +1,125 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">What is your race?</h2>
+  <p class="sub-text">You can select more than one option.</p>
+  <fieldset class="input-group" [regionsInputGroup]="form.get('optOut')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+    <legend class="sr-only">What is your race? You can select more than one option.</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('americanIndianText')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="americanIndian" class="checkbox">
+        <input type="checkbox" id="americanIndian" name="americanIndian" formControlName="americanIndian" (change)="toggleRequireTextInput('americanIndian')"
+        ><span class="check-box" aria-hidden="true"></span> American Indian or Alaska Native<p class="label-wrap">(please specify)</p>
+      </label>
+      <label class="sr-only" for="americanIndianText">Enrolled or principle tribe of American Indian or Alaska Native</label>
+      <input
+        class="sub-label-input"
+        type="text"
+        id="americanIndianText"
+        name="americanIndianText"
+        formControlName="americanIndianText"
+        (input)="toggleCheckOnTextChange('americanIndian')"
+        [regionsAccessibleAttributes]="form.get('americanIndianText')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        id="americanIndianText-error"
+        class="error-text error-required"
+        *ngIf="form.get('americanIndianText').hasError('required')"
+      >enrolled tribe is required</span>
+    </div>
+    <label for="asian" class="checkbox">
+      <input type="checkbox" id="asian" name="asian" formControlName="asian"><span class="check-box" aria-hidden="true"></span> Asian
+    </label>
+    <label for="asianIndian" class="checkbox">
+      <input type="checkbox" id="asianIndian" name="asianIndian" formControlName="asianIndian"><span class="check-box" aria-hidden="true"></span> Asian Indian
+    </label>
+    <label for="chinese" class="checkbox">
+      <input type="checkbox" id="chinese" name="chinese" formControlName="chinese"><span class="check-box" aria-hidden="true"></span> Chinese
+    </label>
+    <label for="filipino" class="checkbox">
+      <input type="checkbox" id="filipino" name="filipino" formControlName="filipino"><span class="check-box" aria-hidden="true"></span> Filipino
+    </label>
+    <label for="japanese" class="checkbox">
+      <input type="checkbox" id="japanese" name="japanese" formControlName="japanese"><span class="check-box" aria-hidden="true"></span> Japanese
+    </label>
+    <label for="korean" class="checkbox">
+      <input type="checkbox" id="korean" name="korean" formControlName="korean"><span class="check-box" aria-hidden="true"></span> Korean
+    </label>
+    <label for="vietnamese" class="checkbox">
+      <input type="checkbox" id="vietnamese" name="vietnamese" formControlName="vietnamese"><span class="check-box" aria-hidden="true"></span> Vietnamese
+    </label>
+    <div [regionsInputGroup]="form.get('otherAsianText')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="otherAsian" class="checkbox">
+        <input type="checkbox" id="otherAsian" name="otherAsian" formControlName="otherAsian" (change)="toggleRequireTextInput('otherAsian')"
+        ><span class="check-box" aria-hidden="true"></span> Other Asian (please specify)
+      </label>
+      <label class="sr-only" for="otherAsianText">Other Asian</label>
+      <input
+        class="sub-label-input"
+        type="text"
+        id="otherAsianText"
+        name="otherAsianText"
+        formControlName="otherAsianText"
+        (input)="toggleCheckOnTextChange('otherAsian')"
+        [regionsAccessibleAttributes]="form.get('otherAsianText')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        id="otherAsianText-error"
+        class="error-text error-required"
+        *ngIf="form.get('otherAsianText').hasError('required')"
+      >other asian text required</span>
+    </div>
+    <label for="africanAmerican" class="checkbox">
+      <input type="checkbox" id="africanAmerican" name="africanAmerican" formControlName="africanAmerican"><span class="check-box" aria-hidden="true"></span> Black or African American
+    </label>
+    <label for="pacificIslander" class="checkbox">
+      <input type="checkbox" id="pacificIslander" name="pacificIslander" formControlName="pacificIslander"><span class="check-box" aria-hidden="true"></span> Native Hawaiian or Other Pacific Islander
+    </label>
+    <label for="nativeHawaiian" class="checkbox">
+      <input type="checkbox" id="nativeHawaiian" name="nativeHawaiian" formControlName="nativeHawaiian"><span class="check-box" aria-hidden="true"></span> Native Hawaiian
+    </label>
+    <label for="guamanian" class="checkbox">
+      <input type="checkbox" id="guamanian" name="guamanian" formControlName="guamanian"><span class="check-box" aria-hidden="true"></span> Guamanian or Chamorro
+    </label>
+    <label for="samoan" class="checkbox">
+      <input type="checkbox" id="samoan" name="samoan" formControlName="samoan"><span class="check-box" aria-hidden="true"></span> Samoan
+    </label>
+    <div [regionsInputGroup]="form.get('otherPacificIslanderText')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="otherPacificIslander" class="checkbox">
+        <input type="checkbox" id="otherPacificIslander" name="otherPacificIslander" formControlName="otherPacificIslander" (change)="toggleRequireTextInput('otherPacificIslander')"><span class="check-box" aria-hidden="true"></span> Other Pacific Islander (please specify)
+      </label>
+      <label class="sr-only" for="otherPacificIslanderText">Other Pacific Islander</label>
+      <input
+        class="sub-label-input"
+        type="text"
+        id="otherPacificIslanderText"
+        name="otherPacificIslanderText"
+        formControlName="otherPacificIslanderText"
+        (input)="toggleCheckOnTextChange('otherPacificIslander')"
+        [regionsAccessibleAttributes]="form.get('otherPacificIslanderText')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        id="otherPacificIslanderText-error"
+        class="error-text error-required"
+        *ngIf="form.get('otherPacificIslanderText').hasError('required')"
+      >other pacific islander text required</span>
+    </div>
+    <label for="white" class="checkbox">
+      <input type="checkbox" id="white" name="white" formControlName="white"><span class="check-box" aria-hidden="true"></span> White
+    </label>
+    <label for="optOut" class="checkbox">
+      <input type="checkbox" id="optOut" name="optOut" formControlName="optOut" (change)="optOutChange()"><span class="check-box" aria-hidden="true"></span> I do not wish to provide this information
+    </label>
+    <span
+      id="optOut-error"
+      class="error-text error-required"
+    >select a race or opt out</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

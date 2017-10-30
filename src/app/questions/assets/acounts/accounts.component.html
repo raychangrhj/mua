@@ -1,0 +1,66 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">
+    {{ !form.get('hasAccounts')?.value ? 'Do you have bank accounts?' : 'Verify your bank account(s).' }}
+  </h2>
+  <a [routerLink]="baseUrl + '/assets/accounts/bank-name'" class="add">
+    add an account
+  </a>
+  <div *ngFor="let account of displayAccounts; index as i;">
+    <div
+      tabindex="0"
+      class="answers-title"
+      (keyup.enter)="removeAccount(i)"
+      (click)="removeAccount(i)"
+    >
+      <h3>{{account?.title}}</h3>
+      <span class="edit">Delete</span>
+    </div>
+    <regions-confirm-answer
+      *ngFor="let answer of account?.answers"
+      [title]="answer?.title"
+      [response]="answer?.response | async"
+      [type]="answer?.type"
+      [link]="answer?.returnLink"
+    ></regions-confirm-answer>
+  </div>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('noAccounts')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Bank Accounts</legend>
+    <label
+      *ngIf="!form.get('hasAccounts')?.value"
+      for="no-accounts"
+      class="checkbox"
+    >
+      <input
+        *ngIf="!form.get('hasAccounts')?.value"
+        type="checkbox"
+        id="no-accounts"
+        name="noAccounts"
+        formControlName="noAccounts"
+        [regionsAccessibleAttributes]="form.get('noAccounts')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     /><span class="check-box" aria-hidden="true"></span>
+      I do not have any bank accounts.
+    </label>
+    <span
+      class="error-text error-required"
+      id="no-accounts-error"
+      *ngIf="form.get('noAccounts').hasError('required')"
+    >
+      checkbox or account required
+    </span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  >
+    <button type="submit" class="btn btn-primary btn-continue">Confirm &amp; Continue</button>
+  </regions-action-btn-group>
+</form>

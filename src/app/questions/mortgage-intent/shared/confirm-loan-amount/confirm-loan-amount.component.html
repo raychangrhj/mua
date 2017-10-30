@@ -1,0 +1,31 @@
+<form (ngSubmit)="onSubmit()">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Is this correct?</h2>
+  <section *ngIf="mortgageType !== 'pre-qualification'">
+    <span>Address:</span>
+    <p class="address">
+      {{propertyLocation?.street}}<br />
+      {{propertyLocation?.unit}}<br *ngIf="propertyLocation?.unit" />
+      {{propertyLocation?.city}}, {{propertyLocation?.state}} {{propertyLocation?.zip}}
+    </p>
+  </section>
+  <section>
+    <span *ngIf="mortgageType !== 'pre-qualification'">Sales Contract Price:</span>
+    <span *ngIf="mortgageType === 'pre-qualification'">Budget:</span>
+    <p class="sales-price">{{cost | currency:'USD':true:'1.0-2'}}</p>
+  </section>
+  <section>
+    <span>Down Payment:</span>
+    <p class="down-payment">{{downPayment | currency:'USD':true:'1.0-2'}}</p>
+  </section>
+  <section class="total">
+    <span>Requested Loan Amount:</span>
+    <p class="loan-amount">{{loanAmount | currency:'USD':true:'1.0-2'}}</p>
+  </section>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

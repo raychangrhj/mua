@@ -1,0 +1,64 @@
+// PAGE LEVEL //
+$page-background:                   #ffffff !default;
+$main-font:                         "Source Sans Pro", sans-serif !default;
+
+// GENERAL COLORS //
+$regions-green:                     #528400 !default;
+$real-regions-green:                #558800 !default;
+$regions-light-green:               #daefb0 !default;
+$light-green:                       #88BD40 !default;
+$light-gray:                        #BDBDBD !default;
+$regions-blue:                      #117788 !default;
+
+// links
+$link-color:                        #117788 !default;
+$housing-link-color:                #528400 !default;
+$link-container-border:             #C9C9C9 !default;
+$exit-link-color:                   #9f3500 !default;
+
+// forms
+$input-borders:                     #B5B5B5 !default;
+$input-focus:                       #528400 !default;
+$input-placeholder:                 #c7c7c7 !default;
+$label-color:                       #333333 !default;
+$required-indicator-color:          #CC4E00 !default;
+$fieldset-invalid-border:           #CC4E00 !default;
+$error-text-color:                  #CC4E00 !default;
+
+// buttons
+$btn-border:                        #ffffff !default;
+
+$btn-primary-bg:                    #528400 !default;
+$btn-primary-color:                 #ffffff !default;
+$btn-primary-border:                #528400 !default;
+$btn-primary-bg-disabled:           #88BD40 !default;
+$btn-primary-border-disabled:       #88BD40 !default;
+
+$btn-secondary-bg:                  #ffffff !default;
+$btn-secondary-color:               #528400 !default;
+$btn-secondary-border:              #528400 !default;
+
+// mlo
+$mlo-title-border:                  #87BC00 !default;
+$mlo-title-color:                   #000000 !default;
+$mlo-person-border:                 #C9C9C9 !default;
+$mlo-name-color:                    #000000 !default;
+$mlo-mls-number-color:              #767676 !default;
+$mlo-table-label-color:             #666666 !default;
+
+// questions
+$totals-row-top-border:             #c7c7c7 !default;
+
+// progress-pills
+$pill-empty-bg:                     #ffffff !default;
+$pill-empty-border:                 #BDBDBD !default;
+$pill-solid-bg:                     #558800 !default;
+$pill-solid-border:                 #ffffff !default;
+$pill-title-color:                  #767676 !default;
+
+// SCREEN BREAKS //
+$small-max-width:                   639px !default;
+$tablet-max-width:                  900px !default;
+
+// pill max size
+$pill-max-width:                    700px !default;

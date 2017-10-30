@@ -1,0 +1,19 @@
+<form (ngSubmit)="onSubmit()">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Please confirm your information.</h2>
+  <regions-confirm-answer
+    *ngFor="let answer of confirmAnswers"
+    [title]="answer?.title"
+    [response]="answer?.response | async"
+    [type]="answer?.type"
+    [link]="answer?.returnLink"
+  ></regions-confirm-answer>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  >
+    <button type="submit" class="btn btn-primary btn-continue">Confirm &amp; Continue</button>
+  </regions-action-btn-group>
+</form>

@@ -1,0 +1,55 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Please enter your Debit or ATM card number.</h2>
+  <fieldset>
+    <legend class="sr-only">Please enter your Debit or ATM card number.</legend>
+    <div class="input-group input-group-card-number" [regionsInputGroup]="form.get('cardNumber')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label class="required" for="card-number">Debit or ATM card number</label>
+      <input
+        type="text"
+        id="card-number"
+        name="cardNumber"
+        formControlName="cardNumber"
+        [regionsAccessibleAttributes]="form.get('cardNumber')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        id="card-number-error"
+        *ngIf="form.get('cardNumber').hasError('required')"
+      >card number is required</span>
+      <span
+        class="error-text error-pattern"
+        id="card-number-error"
+        *ngIf="!form.get('cardNumber').hasError('required') && form.get('cardNumber').hasError('pattern')"
+      >card number must be formatted ####-####-####-####</span>
+    </div>
+    <div class="input-group input-group-pin-number" [regionsInputGroup]="form.get('pinNumber')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label class="required" for="pin-number">PIN number</label>
+      <input
+        type="text"
+        id="pin-number"
+        name="pinNumber"
+        formControlName="pinNumber"
+        [regionsAccessibleAttributes]="form.get('pinNumber')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        if="pin-number-error"
+        *ngIf="form.get('pinNumber').hasError('required')"
+      >pin is required</span>
+      <span
+        class="error-text error-pattern"
+        id="pin-number-error"
+        *ngIf="!form.get('pinNumber').hasError('required') && form.get('pinNumber').hasError('pattern')"
+      >pin can only be numbers</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

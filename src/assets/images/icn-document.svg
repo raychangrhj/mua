@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="47px" height="63px" viewBox="0 0 47 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="1---Welcome---Log-In-/-New-Customer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Welcome-(full)" transform="translate(-136.000000, -236.000000)" stroke-width="3">
+            <g id="Group-3" transform="translate(138.000000, 238.000000)">
+                <polyline id="Stroke-1" stroke="#88BB00" stroke-linejoin="round" points="6.32225 19.7594167 13.54475 20.59275 19.9339167 15.59275 28.4055833 17.2594167 36.8780833 13.9260833"></polyline>
+                <path d="M6.32225,38.9260833 L36.8780833,38.9260833" id="Stroke-2" stroke="#666666"></path>
+                <path d="M6.32225,47.2594167 L36.8780833,47.2594167" id="Stroke-3" stroke="#666666"></path>
+                <path d="M6.32225,30.59275 L20.2114167,30.59275" id="Stroke-4" stroke="#666666"></path>
+                <path d="M35.4043333,0.417 L3.48933333,0.417 C1.79933333,0.417 0.416833333,1.7995 0.416833333,3.4895 L0.416833333,56.0286667 C0.416833333,57.7195 1.79933333,59.102 3.48933333,59.102 L4.85016667,59.102 L38.906,59.102 L40.2668333,59.102 C41.9568333,59.102 43.3393333,57.7195 43.3393333,56.0286667 L43.3393333,8.35116667 L35.4043333,8.35116667 L35.4043333,0.417 Z" id="Stroke-5" stroke="#666666" stroke-linejoin="round"></path>
+                <polyline id="Stroke-7" stroke="#666666" points="35.4043333 0.417 35.4043333 8.35116667 43.3393333 8.35116667"></polyline>
+                <path d="M43.3396667,8.35158333 L35.4046667,0.417416667" id="Stroke-9" stroke="#666666"></path>
+            </g>
+        </g>
+    </g>
+</svg>

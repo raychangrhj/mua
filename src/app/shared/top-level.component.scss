@@ -1,0 +1,21 @@
+@import "../../scss/variables";
+
+:host {
+  min-width: 320px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 10px 20px 0;
+  box-sizing: border-box;
+  display: block;
+  & > form {
+    width: 100%;
+  }
+}
+@media screen and (min-width: $small-max-width) {
+
+  :host {
+    display: block;
+    width: calc(100% - 320px);
+    min-width: 340px;
+  }
+}

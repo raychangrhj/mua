@@ -1,0 +1,41 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Will there be a co-borrower for this loan?</h2>
+  <fieldset
+    role="radiogroup"
+    aria-labelledby="page-heading"
+    [regionsInputGroup]="form.get('coBorrower')" [formSubmitAttempted]="formSubmitAttempted$ | async"
+  >
+    <legend class="sr-only">Will there be a co-borrower for this loan?</legend>
+    <label for="yes" class="radio">
+      <input
+        type="radio"
+        id="yes"
+        name="coBorrower"
+        value="yes"
+        formControlName="coBorrower"
+        [regionsAccessibleAttributes]="form.get('coBorrower')"
+        [formSubmitObservable]="formSubmitAttempted$"
+      >
+      <span class="radio-btn" aria-hidden="true"></span>
+      Yes<span class="sr-only">, there is a co-borrower for this loan.</span>
+    </label>
+    <label for="no" class="radio">
+      <input type="radio" id="no" name="coBorrower" value="no" formControlName="coBorrower">
+      <span class="radio-btn" aria-hidden="true"></span>
+      No<span class="sr-only">, there is not a co-borrower for this loan.</span>
+    </label>
+    <span
+      class="error-text"
+      id="yes-error"
+    >
+      Please select one.
+    </span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

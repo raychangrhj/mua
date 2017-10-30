@@ -1,0 +1,35 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">How much do you owe?</h2>
+  <fieldset>
+    <legend class="sr-only">How much do you owe?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('owe')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="owe" class="required">Current Mortgage Balance</label>
+      <input
+        type="text"
+        id="owe"
+        name="owe"
+        formControlName="owe"
+        [regionsAccessibleAttributes]="form.get('owe')"
+        [formSubmitObservable]="formSubmitAttempted$"
+        (focusout)="formatOwe()"
+     >
+      <span
+        id="owe-error"
+        class="error-text error-required"
+        *ngIf="form.get('owe').hasError('required')"
+      >balance is required</span>
+      <span
+        id="owe-error"
+        class="error-text error-pattern"
+        *ngIf="!form.get('owe').hasError('required') && form.get('owe').hasError('pattern')"
+      >balance must be number/currency</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

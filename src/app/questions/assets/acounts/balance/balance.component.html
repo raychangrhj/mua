@@ -1,0 +1,40 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">
+    <label for="balance">
+      What is the balance of your {{currentAccount ? currentAccount.bankName : tempAccount && tempAccount.bankName}} {{currentAccount ? currentAccount.type : tempAccount && tempAccount.type}}?
+      <span class="sr-only">If you have multiple banks or accounts you can add them later.</span>
+    </label>
+  </h2>
+  <p class="sub-text">If you have multiple banks or accounts you can add them later.</p>
+  <fieldset>
+    <legend class="sr-only">What is the balance of your {{currentAccount ? currentAccount.bankName : tempAccount && tempAccount.bankName}} {{currentAccount ? currentAccount.type : tempAccount && tempAccount.type}}?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('balance')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="balance"
+        name="balance"
+        formControlName="balance"
+        [regionsAccessibleAttributes]="form.get('balance')"
+        [formSubmitObservable]="formSubmitAttempted$"
+        (focusout)="formatBalance()"
+     />
+      <span
+        class="error-text error-required"
+        id="balance-error"
+        *ngIf="form.get('balance').hasError('required')"
+      >balance required</span>
+      <span
+        class="error-text error-pattern"
+        id="balance-error"
+        *ngIf="!form.get('balance').hasError('required') && form.get('balance').hasError('pattern')"
+      >balance must be a number or currency</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

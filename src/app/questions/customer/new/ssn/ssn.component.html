@@ -1,0 +1,34 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub"><label for="ssn">What is your social security number?</label></h2>
+  <fieldset>
+    <legend class="sr-only">What is your social security number?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('ssn')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="ssn"
+        name="ssn"
+        formControlName="ssn"
+        (focusout)="formatSSN()"
+        [regionsAccessibleAttributes]="form.get('ssn')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        id="ssn-error"
+        *ngIf="form.get('ssn').hasError('required')"
+      >ssn is required</span>
+      <span
+        class="error-text error-pattern"
+        id="ssn-error"
+        *ngIf="!form.get('ssn').hasError('required') && form.get('ssn').hasError('pattern')"
+      >please enter a valid social security number</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

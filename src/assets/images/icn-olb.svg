@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="93px" height="71px" viewBox="0 0 93 71" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/OLB profile</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="1---Welcome---Log-In-/-New-Customer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Existing-Customer---Prompt" transform="translate(-36.000000, -228.000000)" stroke-width="3">
+            <g id="Content" transform="translate(0.000000, 32.000000)">
+                <g id="icon/OLB-profile" transform="translate(37.000000, 197.000000)">
+                    <path d="M82.5,60.5 L8.5,60.5 C6.85,60.5 5.5,59.15 5.5,57.5 L5.5,3.5 C5.5,1.85 6.85,0.5 8.5,0.5 L82.5,0.5 C84.15,0.5 85.5,1.85 85.5,3.5 L85.5,57.5 C85.5,59.15 84.15,60.5 82.5,60.5 Z" id="Stroke-1" stroke="#666666"></path>
+                    <path d="M0.5,68 L90.5,68" id="Stroke-3" stroke="#666666"></path>
+                    <path d="M45.3369,10.7129 C30.1829,10.7129 33.9719,25.5599 33.9719,25.5599 C33.9719,25.5599 33.4479,26.1699 33.0239,27.4149 C32.0769,30.1989 34.4259,31.0169 34.9189,33.9099 C35.8649,39.4789 39.2399,40.4059 39.2399,42.2619 C39.2399,44.1179 34.9189,45.0459 34.9189,45.0459 C24.4999,47.8289 25.8019,55.8329 25.8019,55.8329" id="Stroke-5" stroke="#88BB00" stroke-linejoin="round"></path>
+                    <path d="M45.6631,10.7129 C60.8171,10.7129 57.0281,25.5599 57.0281,25.5599 C57.0281,25.5599 57.5521,26.1699 57.9761,27.4149 C58.9231,30.1989 56.5741,31.0169 56.0811,33.9099 C55.1351,39.4789 51.7601,40.4059 51.7601,42.2619 C51.7601,44.1179 56.0811,45.0459 56.0811,45.0459 C66.5001,47.8289 65.1981,55.8329 65.1981,55.8329" id="Stroke-7" stroke="#88BB00" stroke-linejoin="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

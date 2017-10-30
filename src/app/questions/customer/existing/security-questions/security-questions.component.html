@@ -1,0 +1,29 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Please answer the security question below.</h2>
+  <fieldset>
+    <legend class="sr-only">Please answer the security question below.</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('answer')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="answer" class="required">{{questionState.description}}</label>
+      <input
+        type="text"
+        id="answer"
+        name="answer"
+        formControlName="answer"
+        [regionsAccessibleAttributes]="form.get('answer')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        id="answer-error"
+        *ngIf="form.get('answer').hasError('required')"
+      >answer is required</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

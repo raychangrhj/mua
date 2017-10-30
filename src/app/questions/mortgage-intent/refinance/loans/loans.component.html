@@ -1,0 +1,53 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">Which mortgage do you want to refinance?</h2>
+  <fieldset
+    class="input-group"
+    aria-labelledby="page-heading"
+    [regionsInputGroup]="form.get('loanId')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+  >
+    <legend class="sr-only">Which mortgage do you want to refinance?</legend>
+    <div *ngIf="loans">
+      <label *ngFor="let loan of loans" [for]="loan.id" class="radio">
+        <input
+          type="radio"
+          [id]="loan.id"
+          name="loanId"
+          [value]="loan.id"
+          formControlName="loanId"
+          [regionsAccessibleAttributes]="form.get('loanId')"
+				[formSubmitObservable]="formSubmitAttempted$"
+       >
+       <span class="radio-btn" aria-hidden="true"></span>
+        <strong>
+          {{loan.address.street}}<br />
+          {{loan.address.unit}}<br *ngIf="loan.address.unit" />
+          {{loan.address.city}}, {{loan.address.state}} {{loan.address.zip}}
+        </strong>
+        Balance: {{loan.balance | currency:'USD':true:'1-0.2'}}
+        Payment Amount: {{loan.payment | currency:'USD':true:'1-0.2'}}
+      </label>
+    </div>
+    <label for="other" class="radio">
+      <input type="radio" id="other" name="loanId" value="other" formControlName="loanId">
+      <span class="radio-btn" aria-hidden="true"></span>
+      My loan isn't with Regions
+    </label>
+    <span
+      [id]="loans[0].id"
+      class="error-text error-required"
+      *ngIf="loans && loans[0] && form.get('loanId').hasError('required')"
+    >select other or existing loan</span>
+    <span
+      class="error-text error-required"
+      *ngIf="(!loans || !loans[0]) && form.get('loanId').hasError('required')"
+    >select other or existing loan</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

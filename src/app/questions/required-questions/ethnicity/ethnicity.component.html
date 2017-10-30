@@ -1,0 +1,69 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">What is your ethnicity?</h2>
+  <p class="sub-text">You can select more than one option.</p>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('optOut')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+  >
+    <legend class="sr-only">What is your ethnicity? You can select more than one option.</legend>
+    <label for="hispanic" class="checkbox">
+      <input
+        type="checkbox"
+        id="hispanic"
+        name="hispanic"
+        formControlName="hispanic"
+        [regionsAccessibleAttributes]="form.get('hispanic')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     ><span class="check-box" aria-hidden="true"></span> Hispanic or Latino
+    </label>
+    <label for="mexican" class="checkbox">
+      <input type="checkbox" id="mexican" name="mexican" formControlName="mexican"><span class="check-box" aria-hidden="true"></span> Mexican
+    </label>
+    <label for="puertoRican" class="checkbox">
+      <input type="checkbox" id="puertoRican" name="puertoRican" formControlName="puertoRican"><span class="check-box" aria-hidden="true"></span> Puerto Rican
+    </label>
+    <label for="cuban" class="checkbox">
+      <input type="checkbox" id="cuban" name="cuban" formControlName="cuban"><span class="check-box" aria-hidden="true"></span> Cuban
+    </label>
+    <div>
+      <label for="otherHispanic" class="checkbox">
+        <input type="checkbox" id="otherHispanic" name="otherHispanic" formControlName="otherHispanic" (change)="otherHispanicChange()"><span class="check-box" aria-hidden="true"></span> Other Hispanic or Latino (please specify)
+      </label>
+      <div class="input-group input-group-otherHispanic" [regionsInputGroup]="form.get('otherHispanicText')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+        <label class="sr-only" for="otherHispanicText">Other Hispanic or Latino</label>
+        <input class="sub-label-input" type="text" id="otherHispanicText" name="otherHispanicText" formControlName="otherHispanicText" placeholder="" (input)="otherHispanicTextChange()">
+        <span
+          class="error-text error-required"
+          id="hispanic-error"
+          *ngIf="form.get('otherHispanicText').hasError('required')"
+        >specify other hispanic or latino</span>
+      </div>
+    </div>
+    <label for="nonHispanic" class="checkbox">
+      <input type="checkbox" id="nonHispanic" name="nonHispanic" formControlName="nonHispanic"><span class="check-box" aria-hidden="true"></span> Not Hispanic or Latino
+    </label>
+    <label for="optOut" class="checkbox">
+      <input
+        type="checkbox"
+        id="optOut"
+        name="optOut"
+        formControlName="optOut"
+        (change)="optOutChange()"
+        [regionsAccessibleAttributes]="form.get('optOut')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     ><span class="check-box" aria-hidden="true"></span> I do not wish to provide this information
+    </label>
+    <span
+      class="error-text error-required"
+      id="optOut-error"
+    >select an option or opt out</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

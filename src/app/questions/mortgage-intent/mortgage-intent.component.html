@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">What would you like to do?</h2>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('loanType')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">What would you like to do?</legend>
+    <label for="buy" class="radio">
+      <input
+        type="radio"
+        id="buy"
+        name="loanType"
+        value="buy"
+        formControlName="loanType"
+        [regionsAccessibleAttributes]="form.get('loanType')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      I want to buy a house.
+    </label>
+    <label for="refinance" class="radio">
+      <input type="radio" id="refinance" name="loanType" value="refinance" formControlName="loanType">
+      <span class="radio-btn" aria-hidden="true"></span>
+      I want to refinance an existing loan.
+    </label>
+    <span
+      id="buy-error"
+      class="error-text error-required"
+      *ngIf="form.get('loanType').hasError('required')"
+    >select a loan type</span>
+  </fieldset>
+  <regions-action-btn-group
+    *ngIf="actionBtnLinkOptions"
+    [linkOptions]="actionBtnLinkOptions"
+  ></regions-action-btn-group>
+</form>

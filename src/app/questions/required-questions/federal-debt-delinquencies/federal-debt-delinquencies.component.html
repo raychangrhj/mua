@@ -1,0 +1,44 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">
+    Are you presently delinquent or in default on any federal debt or any other loan, mortgage, financial obligation, bond, or loan guarantee?
+  </h2>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('federalDebtDelinquencies')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Are you presently delinquent or in default on any federal debt or any other loan, mortgage, financial obligation, bond, or loan guarantee?</legend>
+    <label for="yes" class="radio">
+      <input
+        type="radio"
+        id="yes"
+        name="federalDebtDelinquencies"
+        value="yes"
+        formControlName="federalDebtDelinquencies"
+        [regionsAccessibleAttributes]="form.get('federalDebtDelinquencies')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      Yes<span class="sr-only">, I am presently delinquent or in default on a federal debt or another loan, mortgage, financial obligation, bond, or loan guarantee.</span>
+    </label>
+    <label for="no" class="radio">
+      <input type="radio" id="no" name="federalDebtDelinquencies" value="no" formControlName="federalDebtDelinquencies">
+      <span class="radio-btn" aria-hidden="true"></span>
+      No<span class="sr-only">, I am not presently delinquent or in default on a federal debt or other loan, mortgage, financial obligation, bond, or loan guarantee.</span>
+    </label>
+    <span
+      *ngIf="form.get('federalDebtDelinquencies').hasError('required')"
+      id="yes-error"
+      class="error-text error-required">
+      select an option
+    </span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

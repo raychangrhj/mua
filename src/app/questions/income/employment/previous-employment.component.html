@@ -1,0 +1,64 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">
+    {{ !form.get('hasPrevEmployments')?.value ? 'Were you previously employed?' : 'Verify your previous employment.' }}
+  </h2>
+  <p class="sub-text">Additional employment history may be required if you have been with your current job for less than 2 years.</p>
+  <a [routerLink]="baseUrl + '/income/previous-employment/company-name'" class="add">
+    add employment
+  </a>
+  <div *ngFor="let employment of displayEmployments; index as i;">
+    <div
+      tabindex="0"
+      class="answers-title"
+      (keyup.enter)="removeEmployment(i)"
+      (click)="removeEmployment(i)"
+    >
+      <h3>{{employment?.title}}</h3>
+      <span class="edit">Delete</span>
+    </div>
+    <regions-confirm-answer
+      *ngFor="let answer of employment?.answers"
+      [title]="answer?.title"
+      [response]="answer?.response | async"
+      [type]="answer?.type"
+      [link]="answer?.returnLink"
+    ></regions-confirm-answer>
+  </div>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('noPrevEmployment')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">Previous Employment</legend>
+    <label
+      *ngIf="!form.get('hasEmployments')?.value"
+      for="no-previous-employment"
+      class="checkbox"
+    >
+      <input
+        *ngIf="!form.get('hasEmployments')?.value"
+        type="checkbox"
+        id="no-previous-employment"
+        name="noPrevEmployment"
+        formControlName="noPrevEmployment"
+        [regionsAccessibleAttributes]="form.get('noPrevEmployment')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     ><span class="check-box" aria-hidden="true"></span> I have no employment history.
+    </label>
+    <span
+      id="no-previous-employment-error"
+      class="error-text error-required"
+      *ngIf="form.get('noPrevEmployment').hasError('required')"
+    >previous employment or checkbox required</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  >
+    <button type="submit" class="btn btn-primary btn-continue">Confirm &amp; Continue</button>
+  </regions-action-btn-group>
+</form>

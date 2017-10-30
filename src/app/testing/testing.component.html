@@ -1,0 +1,92 @@
+<h4>Outcome of Request</h4>
+<pre>{{output | json}}</pre>
+<ul>
+  <li>
+    <a (click)="postProxyApiHeartBeat()">
+      POST - api/app/proxy/heartbeat
+    </a>
+  </li>
+  <li>
+    <a (click)="postRmappApiHeartBeat()">
+      POST - api/app/heartbeat
+    </a>
+  </li>
+  <li>
+    <a (click)="postLocatorApiHeartBeat()">
+      POST - api/locator/heartbeat
+    </a>
+  </li>
+  <li>
+    <a (click)="postPrefillApiHeartBeat()">
+      POST - api/prefill/heartbeat
+    </a>
+  </li>
+  <li>
+    <a (click)="postUserPass()">
+      POST - api/prefill/cq/olb
+    </a>
+    <input type="text" [(ngModel)]="loginusername" placeholder="user name" />
+    <input type="password" [(ngModel)]="loginpassword" placeholder="password" />
+  </li>
+  <li>
+    <a (click)="postChallengeQuestion()">
+      POST - api/prefill/cq/olb
+    </a>
+    <input type="text" [(ngModel)]="challengeId" placeholder="challenge id" />
+    <input type="text" [(ngModel)]="challengeQuestionId" placeholder="question id" />
+    <input type="text" [(ngModel)]="challengeSessionId" placeholder="session id" />
+    <input type="text" [(ngModel)]="challengeAnswer" placeholder="answer" />
+    <input type="text" [(ngModel)]="challengeVersion" placeholder="version" />
+    <input type="text" [(ngModel)]="challengeEmail" placeholder="email" />
+  </li>
+  <li>
+    <a (click)="postApplication()">
+      POST - api/app/retrieve
+    </a>
+    <input type="text" [(ngModel)]="applicationMasterId" placeholder="master id" />
+    <input type="text" [(ngModel)]="applicationLastFourSSN" placeholder="SSN last 4" />
+    <input type="text" [(ngModel)]="applicationAccessCode" placeholder="access code" />
+    <input type="text" [(ngModel)]="applicationEmail" placeholder="email" />
+  </li>
+  <li>
+    <a (click)="getFootPrintByStateName()">
+      GET - api/app/footprint/name/[stateName]
+    </a>
+    <input type="text" [(ngModel)]="footPrintStateName" placeholder="state name" />
+  </li>
+  <li>
+    <a (click)="getFootPrintByStateCode()">
+      GET - api/app/footprint/code/[stateCode]
+    </a>
+    <input type="text" [(ngModel)]="footPrintStateCode" placeholder="state name" />
+  </li>
+  <li>
+    <a (click)="getLoanOfficerWebsite()">
+      GET - api/locator/officer/website/[websiteName]
+    </a>
+    <input type="text" [(ngModel)]="loanOfficerWebsite" placeholder="website name" />
+  </li>
+  <li>
+    <a (click)="getLoanOfficerCrc()">
+      GET - api/locator/officer/inrotation/crc/[1 || 0]
+    </a>
+    <div class="select-wrapper">
+      <select [(ngModel)]="loanOfficerCrc">
+        <option value="1">application</option>
+        <option value="0">inquiry</option>
+      </select>
+    </div>
+  </li>
+  <li>
+    <a (click)="getLoanOfficerById()">
+      GET - api/locator/lid/loanOfficerId/[loanOfficerId]
+    </a>
+    <input type="text" [(ngModel)]="loanOfficerId" placeholder="loan officer id" />
+  </li>
+  <li>
+    <a (click)="getLoanOfficerManager()">
+      GET - api/locator/officer/managerinfo/[loanOfficerAssociateId]
+    </a>
+    <input type="text" [(ngModel)]="loanOfficerAssociateId" placeholder="loan officer associate id" />
+  </li>
+</ul>

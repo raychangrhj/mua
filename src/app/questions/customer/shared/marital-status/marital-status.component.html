@@ -1,0 +1,54 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">What is your marital status?</h2>
+  <fieldset
+    aria-labelledby="page-heading"
+    [regionsInputGroup]="form.get('maritalStatus')" [formSubmitAttempted]="formSubmitAttempted$ | async"
+  >
+    <legend class="sr-only">What is your marital status?</legend>
+    <label for="married" class="radio">
+      <input
+        type="radio"
+        id="married"
+        name="maritalStatus"
+        value="married"
+        formControlName="maritalStatus"
+        [regionsAccessibleAttributes]="form.get('maritalStatus')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span class="radio-btn" aria-hidden="true"></span><span class="sr-only">Married status is</span> Married
+    </label>
+    <label for="separated" class="radio">
+      <input
+        type="radio"
+        id="separated"
+        name="maritalStatus"
+        value="separated"
+        formControlName="maritalStatus"
+      >
+      <span class="radio-btn" aria-hidden="true"></span><span class="sr-only">Married status is</span> Legally Separated
+    </label>
+    <label for="unmarried" class="radio">
+      <input
+        type="radio"
+        id="unmarried"
+        name="maritalStatus"
+        value="unmarried"
+        formControlName="maritalStatus"
+      >
+      <span class="radio-btn" aria-hidden="true"></span><span class="sr-only">Married status is</span> Unmarried/Widowed/Divorced
+    </label>
+    <span
+      class="error-text"
+      id="married-error"
+    >
+      Please select one.
+    </span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

@@ -1,0 +1,47 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">More specifically what would you like to accomplish?</h2>
+  <fieldset
+    class="input-group"
+    aria-labelledby="page-heading"
+    [regionsInputGroup]="form.get('intent')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+  >
+    <label for="lower-payment" class="radio">
+      <input
+        type="radio"
+        id="lower-payment"
+        name="intent"
+        value="lower-payment"
+        formControlName="intent"
+        [regionsAccessibleAttributes]="form.get('intent')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+     <span class="radio-btn" aria-hidden="true"></span>
+      Lower my payment
+    </label>
+    <label for="pay-off" class="radio">
+      <input type="radio" id="pay-off" name="intent" value="pay-off" formControlName="intent">
+      <span class="radio-btn" aria-hidden="true"></span>
+      Pay off my loan faster
+    </label>
+    <label for="cash-out" class="radio">
+      <input type="radio" id="cash-out" name="intent" value="cash-out" formControlName="intent">
+      <span class="radio-btn" aria-hidden="true"></span>
+      Take cash out of my home
+    </label>
+    <span
+      id="lower-payment-error"
+      class="error-text error-required"
+      *ngIf="form.get('intent').hasError('required')"
+    >
+      select an option
+    </span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

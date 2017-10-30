@@ -1,0 +1,59 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2
+    id="page-heading"
+    tabindex="-1"
+    #pageHeading
+    class="primary-text no-sub"
+    *ngIf="mortgageType !== 'pre-qualification'"
+  >How much will it cost?</h2>
+  <h2
+    id="page-heading"
+    tabindex="-1"
+    #pageHeading
+    class="primary-text no-sub"
+    *ngIf="mortgageType === 'pre-qualification'"
+  >How much are you looking to spend?</h2>
+  <fieldset>
+    <legend class="sr-only" *ngIf="mortgageType !== 'pre-qualification'">How much will it cost?</legend>
+    <legend class="sr-only" *ngIf="mortgageType === 'pre-qualification'">How much are you looking to spend?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('price')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="price" class="required" *ngIf="mortgageType !== 'pre-qualification'">Sales Contract Price</label>
+      <input
+        type="text"
+        id="price"
+        name="price"
+        formControlName="price"
+        [regionsAccessibleAttributes]="form.get('price')"
+        [formSubmitObservable]="formSubmitAttempted$"
+        (focusout)="formatPrice()"
+     >
+      <span
+        id="price-error"
+        class="error-text error-required"
+        *ngIf="form.get('price').hasError('required') && mortgageType !== 'pre-qualification'"
+      >price is required</span>
+      <span
+        id="price-error"
+        class="error-text error-required"
+        *ngIf="form.get('price').hasError('required') && mortgageType === 'pre-qualification'"
+      >spending estimate is required</span>
+      <span
+        id="price-error"
+        class="error-text error-pattern"
+        *ngIf="!form.get('price').hasError('required') && form.get('price').hasError('pattern') && mortgageType !== 'pre-qualification'"
+      >price must be a number/currency</span>
+      <span
+        id="price-error"
+        class="error-text error-pattern"
+        *ngIf="!form.get('price').hasError('required') && form.get('price').hasError('pattern') && mortgageType === 'pre-qualification'"
+      >spending estimate must be a number/currency</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

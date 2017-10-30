@@ -1,0 +1,79 @@
+@import "variables";
+
+h2.primary-text {
+  font-weight: lighter;
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  &:focus {
+    outline: none;
+  }
+}
+@media screen and (min-width: 654px) and (max-width: 900px) {
+  h2.primary-text {
+    margin-top: 0;
+  }
+}
+
+h2.no-sub {
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 20px;
+  padding: 6px 10px 0;
+}
+h5 {
+  font-family: $main-font;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.sub-text {
+  font-size: 16px;
+  line-height: 22px;
+  color: #333;
+  margin: 10px 0;
+  font-weight: lighter;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+}

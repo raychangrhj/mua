@@ -1,0 +1,34 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">
+    <label for="bank-name">
+      Where do you bank?
+      <span class="sr-only">If you have multiple banks or accounts you can add them later.</span>
+    </label>
+  </h2>
+  <p class="sub-text">If you have multiple banks or accounts you can add them later.</p>
+  <fieldset>
+    <legend class="sr-only">Where do you bank?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('bankName')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="bank-name"
+        name="bankName"
+        formControlName="bankName"
+        [regionsAccessibleAttributes]="form.get('bankName')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        id="bank-name-error"
+        *ngIf="form.get('bankName').hasError('required')"
+      >bank name required</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

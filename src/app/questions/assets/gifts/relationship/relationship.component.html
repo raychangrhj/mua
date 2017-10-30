@@ -1,0 +1,30 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">
+    <label for="relationship">What is their relationship to you?</label>
+  </h2>
+  <fieldset>
+    <legend class="sr-only">What is their relationship to you?</legend>
+    <div class="input-group" [regionsInputGroup]="form.get('relationship')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <input
+        type="text"
+        id="relationship"
+        name="relationship"
+        formControlName="relationship"
+        [regionsAccessibleAttributes]="form.get('relationship')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     />
+      <span
+        class="error-text error-required"
+        id="relationship-error"
+        *ngIf="form.get('relationship').hasError('required')"
+      >relationship is required</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

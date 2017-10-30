@@ -1,0 +1,105 @@
+<!--
+TODO: Ask Calvin about the duplicated id's in this html
+-->
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <div *ngIf="isCurrentEmployment">
+    <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text" *ngIf="currentEmployment && currentEmployment.companyName">
+      <label for="start-date">
+        When did you begin working at {{currentEmployment.companyName}}?
+        <span class="sr-only">Please enter MM/YYYY</span>
+      </label>
+    </h2>
+    <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text" *ngIf="!(currentEmployment && currentEmployment.companyName)">
+      <label for="start-date">
+        When did you begin working at {{companyName$ | async}}?
+        <span class="sr-only">Please enter MM/YYYY</span>
+      </label>
+    </h2>
+    <p class="sub-text">Please enter MM/YYYY</p>
+    <fieldset>
+      <legend *ngIf="currentEmployment && currentEmployment.companyName" class="sr-only">When did you begin working at {{currentEmployment.companyName}}?</legend>
+      <legend *ngIf="!(currentEmployment && currentEmployment.companyName)" class="sr-only">When did you begin working at {{companyName$ | async}}?</legend>
+      <div class="input-group" [regionsInputGroup]="form.get('startDate')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+        <input
+          type="text"
+          id="start-date"
+          name="startDate"
+          placeholder=""
+          formControlName="startDate"
+          [regionsAccessibleAttributes]="form.get('startDate')"
+				  [formSubmitObservable]="formSubmitAttempted$"
+       >
+        <span
+          id="start-date-error"
+          class="error-text error-required"
+          *ngIf="form.get('startDate').hasError('required')"
+        >start date is required</span>
+        <span
+          id="start-date-error"
+          class="error-text error-date"
+          *ngIf="!form.get('startDate').hasError('required') && form.get('startDate').hasError('date')"
+        >start date must be formatted MM/YYYY</span>
+      </div>
+    </fieldset>
+  </div>
+  <div *ngIf="!isCurrentEmployment">
+    <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text" *ngIf="currentEmployment && currentEmployment.companyName">When did you work at {{currentEmployment.companyName}}?</h2>
+    <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text" *ngIf="!(currentEmployment && currentEmployment.companyName)">When did you work at {{companyName$ | async}}?</h2>
+    <p class="sub-text">Please enter MM/YYYY</p>
+    <fieldset>
+      <legend *ngIf="currentEmployment && currentEmployment.companyName" class="sr-only">When did you work at {{currentEmployment.companyName}}?</legend>
+      <legend *ngIf="!(currentEmployment && currentEmployment.companyName)" class="sr-only">When did you work at {{companyName$ | async}}?</legend>
+      <div class="input-group" [regionsInputGroup]="form.get('startDate')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+        <label for="start-date" class="required">Start Date</label>
+        <input
+          type="text"
+          id="start-date"
+          name="startDate"
+          placeholder=""
+          formControlName="startDate"
+          [regionsAccessibleAttributes]="form.get('startDate')"
+				  [formSubmitObservable]="formSubmitAttempted$"
+       >
+        <span
+          id="startDate-error"
+          class="error-text error-required"
+          *ngIf="form.get('startDate').hasError('required')"
+        >start date is required</span>
+        <span
+          id="startDate-error"
+          class="error-text error-date"
+          *ngIf="!form.get('startDate').hasError('required') && form.get('startDate').hasError('date')"
+        >start date must be formatted MM/YYYY</span>
+      </div>
+      <div class="input-group" [regionsInputGroup]="form.get('endDate')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+        <label for="end-date" class="required">End Date</label>
+        <input
+          type="text"
+          id="end-date"
+          name="endDate"
+          placeholder=""
+          formControlName="endDate"
+          [regionsAccessibleAttributes]="form.get('endDate')"
+				[formSubmitObservable]="formSubmitAttempted$"
+       >
+        <span
+          id="end-date-error"
+          class="error-text error-required"
+          *ngIf="form.get('endDate').hasError('required')"
+        >end date is required</span>
+        <span
+          id="end-date-error"
+          class="error-text error-date"
+          *ngIf="!form.get('endDate').hasError('required') && form.get('endDate').hasError('date')"
+        >end date must be formatted MM/YYYY</span>
+      </div>
+    </fieldset>
+  </div>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

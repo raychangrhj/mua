@@ -1,0 +1,16 @@
+<form>
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">Great!</h2>
+  <p class="sub-text">
+    Please have your co-borrower complete their information on the following screens. When finished, the entire application will be submitted.
+  </p>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  >
+    <a class="btn btn-secondary btn-back" routerLink="/co-borrower-inquiry" (click)="switchCustomerType('borrower')">Back</a>
+    <a class="btn btn-primary btn-next" routerLink="/co-borrower" (click)="switchCustomerType('coBorrower')">Next</a>
+  </regions-action-btn-group>
+</form>

@@ -1,0 +1,57 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text">What will your down payment be?</h2>
+  <p class="sub-text">If you aren't planning on making a down payment just enter 0 below.</p>
+  <p class="sub-text">Total purchase price <span class="price">{{loanPrice | currency:'USD':true:'1.0-2'}}</span></p>
+  <p class="sr-only">Enter either a dollar amount or a percent of your loan to be your down payment below.</p>
+  <fieldset
+    class="input-group"
+    [regionsInputGroup]="form.get('downPaymentAmount')"
+    [formSubmitAttempted]="formSubmitAttempted$ | async"
+    aria-labelledby="page-heading"
+  >
+    <legend class="sr-only">What will your down payment be?</legend>
+    <div class="dp-input-container">
+      <label for="down-payment-amount" class="sr-only">
+        Down payment amount in dollars
+      </label>
+      <input
+        type="text"
+        id="down-payment-amount"
+        name="downPaymentAmount"
+        formControlName="downPaymentAmount"
+        (focus)="onAmountFocus()"
+        (focusout)="onAmountBlur()"
+        [regionsAccessibleAttributes]="form.get('downPaymentAmount')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <p class="sub-text text-center" id="dp-divider">or</p>
+      <label for="down-payment-percent" class="sr-only">
+        Down payment amount as a percent of your loan
+      </label>
+      <input
+        type="text"
+        id="down-payment-percent"
+        name="downPaymentPercent"
+        formControlName="downPaymentPercent"
+        (focus)="onPercentFocus()"
+        (focusout)="onPercentBlur()" />
+    </div>
+    <span
+      id="down-payment-amount-error"
+      class="error-text error-required"
+      *ngIf="form.get('downPaymentAmount').hasError('required')"
+    >down payment is required</span>
+    <span
+      id="down-payment-amount-error"
+      class="error-text error-pattern"
+      *ngIf="!form.get('downPaymentAmount').hasError('required') && form.get('downPaymentAmount').hasError('pattern')"
+    >down payment number be number/currency</span>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

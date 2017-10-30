@@ -1,0 +1,128 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">What is the property address?</h2>
+  <fieldset *ngIf="(isRefinance$ | async) === 'refinance'" id="is-same-as-primary-address-fieldset">
+    <legend class="sr-only">Is your loan address the same as your current address?</legend>
+    <div class="input-group input-group-same-as-address">
+      <label for="same-as-address" class="checkbox">
+        <input type="checkbox" id="same-as-address" (change)="useBorrowerAddress($event.currentTarget.checked)" /><span class="check-box" aria-hidden="true"></span> Same as current address
+      </label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend class="sr-only">What is the property address?</legend>
+    <div class="input-group input-group-street" [regionsInputGroup]="form.get('street')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="street" class="required">Street Address</label>
+      <input
+        #autocomplete
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="off"
+        type="text"
+        id="street"
+        name="street"
+        formControlName="street"
+        [regionsAccessibleAttributes]="form.get('street')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        class="error-text error-required"
+        id="street-error"
+        *ngIf="form.get('street').hasError('required')"
+      >street address is required</span>
+    </div>
+    <div class="input-group input-group-unit">
+      <label for="unit">Unit</label>
+      <input
+        type="text"
+        id="unit"
+        name="unit"
+        formControlName="unit"
+      >
+    </div>
+    <div class="input-group input-group-county" [regionsInputGroup]="form.get('county')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="county" class="required">County</label>
+      <input
+        type="text"
+        id="county"
+        name="county"
+        formControlName="county"
+        [regionsAccessibleAttributes]="form.get('county')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        class="error-text error-required"
+        id="county-error"
+        *ngIf="form.get('county').hasError('required')"
+      >county is required</span>
+    </div>
+    <div class="input-group input-group-city" [regionsInputGroup]="form.get('city')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="city" class="required">City</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        formControlName="city"
+        [regionsAccessibleAttributes]="form.get('city')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        class="error-text error-required"
+        id="city-error"
+        *ngIf="form.get('city').hasError('required')"
+      >city is required</span>
+    </div>
+    <div class="input-group input-group-state" [regionsInputGroup]="form.get('state')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="state" class="required">State</label>
+      <div class="select-wrapper">
+        <select
+          id="state"
+          name="state"
+          formControlName="state"
+          [regionsAccessibleAttributes]="form.get('state')"
+				[formSubmitObservable]="formSubmitAttempted$"
+       >
+          <option value="null">Please select</option>
+          <option *ngFor="let option of stateOptions" [value]="option.value">{{option.description}}</option>
+        </select>
+      </div>
+      <span
+        class="error-text error-required"
+        id="state-error"
+        *ngIf="form.get('state').hasError('required')"
+      >state is required</span>
+      <span
+        class="error-text error-state-code"
+        id="state-error"
+        *ngIf="!form.get('state').hasError('required') && form.get('state').hasError('stateCode')"
+      >state must be a valid option</span>
+    </div>
+    <div class="input-group input-group-zip" [regionsInputGroup]="form.get('zip')" [formSubmitAttempted]="formSubmitAttempted$ | async">
+      <label for="zip" class="required">Zip Code</label>
+      <input
+        type="text"
+        id="zip"
+        name="zip"
+        formControlName="zip"
+        [regionsAccessibleAttributes]="form.get('zip')"
+				[formSubmitObservable]="formSubmitAttempted$"
+     >
+      <span
+        class="error-text error-required"
+        id="zip-error"
+        *ngIf="form.get('zip').hasError('required')"
+      >zip code is required</span>
+      <span
+        class="error-text error-pattern"
+        id="zip-error"
+        *ngIf="!form.get('zip').hasError('required') && form.get('zip').hasError('pattern')"
+      >zip code must be formatted correctly</span>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

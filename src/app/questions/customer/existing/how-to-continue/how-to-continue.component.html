@@ -1,0 +1,23 @@
+<form>
+  <regions-progress-pills
+    [title]="pillsTitle$ | async"
+    [pills]="pills$ | async"
+  ></regions-progress-pills>
+  <h2 id="page-heading" tabindex="-1" #pageHeading class="primary-text no-sub">How would you like to continue?</h2>
+  <fieldset>
+    <legend class="sr-only">How would you like to continue?</legend>
+    <div class="icon-group-container icon-padding">
+      <a routerLink="/existing-customer/online-banking" class="icon-container" alt="">
+        <img src="assets/images/icn-olb.svg" alt="">
+        <p class="icon-link">Regions Online Banking Log-In</p>
+      </a>
+      <a routerLink="/existing-customer/atm" class="icon-container" alt="">
+        <img src="assets/images/icn-atm.svg" alt="">
+        <p class="icon-link">Regions Debt or ATM Card</p>
+      </a>
+    </div>
+  </fieldset>
+  <regions-action-btn-group
+    [linkOptions]="actionBtnLinkOptions$ | async"
+  ></regions-action-btn-group>
+</form>

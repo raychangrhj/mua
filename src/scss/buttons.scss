@@ -1,0 +1,91 @@
+@import "variables";
+
+button.btn, a.btn {
+  display: inline-block;
+  width: 116px;
+  height: 46px;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 44px;
+  text-align: center;
+  padding: 0;
+  border: 2px solid $btn-border;
+  position: relative;
+  overflow: hidden;
+  font-family: "Source Sans Pro", sans-serif;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  &.btn-primary {
+    background: $btn-primary-bg;
+    color: $btn-primary-color;
+    border: 2px solid $btn-primary-border;
+
+    &[disabled], &.disabled {
+      background: $btn-primary-bg-disabled;
+      border-color: $btn-primary-border-disabled;
+    }
+  }
+
+  &.btn-acknowledge {
+    width: 250px;
+    margin: 0 16px 40px 0;
+  }
+
+  &.btn-secondary {
+    background: $btn-secondary-bg;
+    color: $btn-secondary-color;
+    border: 2px solid $btn-secondary-border;
+  }
+
+  &.btn-reject, &.btn-back {
+    padding-left: 16px;
+    margin: 0 16px 40px 0;
+
+    &::before {
+      position: absolute;
+      left: 16px;
+      color: $btn-secondary-color;
+    }
+  }
+
+  &.btn-reject::before {
+    content:"X";
+    font-size: 22px;
+  }
+
+  &.btn-back::before {
+    top: -4px;
+    content:"\2039";
+    font-size: 42px;
+  }
+
+  &.btn-accept, &.btn-next {
+    padding-right: 16px;
+    margin: 0 0 40px 16px;
+
+    &::after {
+      position: absolute;
+      right: 16px;
+      color: $btn-primary-color;
+      margin: 0;
+    }
+  }
+
+  &.btn-accept::after {
+    content:"\2713";
+    font-size: 22px;
+  }
+
+  &.btn-next::after {
+    top: -4px;
+    content:"\203A";
+    font-size: 42px;
+  }
+
+  &.btn-continue {
+    margin: 0 auto 40px;
+    width: 200px;
+    height: 50px;
+  }
+}

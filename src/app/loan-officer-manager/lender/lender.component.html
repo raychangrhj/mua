@@ -1,0 +1,67 @@
+<div *ngIf="mlo" role="complementary">
+  <div class="contact-container">
+    <div class="contact-header">
+        <h2 class="sr-only">Your Mortgage Loan Originator</h2>
+      <div class="profile-img-container" *ngIf="mlo?.picture?.mimeType && mlo?.picture?.pictureData">
+        <img class="profile-img photo" src="data:image/{{mlo?.picture?.mimeType}};base64,{{mlo?.picture?.pictureData}}" alt="">
+      </div>
+      <div class="profile-img-container" *ngIf="!mlo?.picture?.mimeType || !mlo?.picture?.pictureData">
+        <img class="profile-img photo" src="assets/images/avatar-MLO.png" alt="">
+      </div>
+      <div class="contact-header-details">
+        <p class="contact-name">{{mlo?.firstName}} {{mlo?.middleName}} {{mlo?.lastName}}</p>
+        <p class="contact-title" aria-hidden="true">Mortgage Loan Originator</p>
+        <p class="contact-id">NMLS ID: {{mlo?.nmlsNumber}}</p>
+      </div>
+    </div>
+    <div
+      class="action-row"
+      (click)="expand()"
+    >
+    <!-- TODO: Add attributes to let user know it's expanded/collapsed `aria-expanded=true/false` -->
+      <p
+        class="action-text action-show"
+        [ngClass]="{'action-hide' : !notExpanded}"
+      >{{notExpanded ? 'Show' : 'Hide'}} Contact Details</p>
+    </div>
+    <dl
+      class="contact-details"
+      [ngClass]="{'detail-hide': notExpanded, 'toggled': toggled}"
+      >
+      <div class="contact-detail-row" *ngIf="mlo?.primaryLocation?.phoneNumber?.tollFreeNumber.trim()">
+        <dt class="detail-label">Toll Free</dt>
+        <dd class="detail-content"><a href="tel:{{cleanString(mlo?.primaryLocation?.phoneNumber?.tollFreeNumber)}}">
+            {{mlo?.primaryLocation?.phoneNumber?.tollFreeNumber}}
+          </a></dd>
+      </div>
+      <div class="contact-detail-row" *ngIf="mlo?.primaryLocation?.phoneNumber?.officePhone.trim()">
+        <dt class="detail-label">Office</dt>
+        <dd class="detail-content"><a href="tel:{{cleanString(mlo?.primaryLocation?.phoneNumber?.officePhone)}}">
+            {{mlo?.primaryLocation?.phoneNumber?.officePhone}}
+          </a></dd>
+      </div>
+      <div class="contact-detail-row" *ngIf="mlo?.primaryLocation?.phoneNumber?.cellPhone.trim()">
+        <dt class="detail-label">Cell</dt>
+        <dd class="detail-content"><a href="tel:{{cleanString(mlo?.primaryLocation?.phoneNumber?.cellPhone)}}">
+            {{mlo?.primaryLocation?.phoneNumber?.cellPhone}}
+          </a></dd>
+      </div>
+      <!-- <div class="contact-detail-row" *ngIf="mlo?.primaryLocation?.phoneNumber?.faxNumber.trim()">
+        <dt class="detail-label">Fax</dt>
+        <dd class="detail-content">{{mlo?.primaryLocation?.phoneNumber?.faxNumber}}</dd>
+      </div> -->
+      <div class="contact-detail-row" *ngIf="mlo?.emailAddress.trim()">
+        <dt class="detail-label">Email</dt>
+        <dd class="detail-content"><a href="mailto:{{mlo?.emailAddress}}?Subject=Mortgage%20Application">
+            {{mlo?.emailAddress}}
+          </a></dd>
+      </div>
+      <div class="contact-detail-row" *ngIf="mlo?.primaryLocation">
+        <dt class="detail-label">Address</dt>
+        <dd class="detail-content">{{mlo?.primaryLocation.address1}}<br>
+          {{mlo?.primaryLocation.address2}}<br *ngIf="mlo?.primaryLocation.address2">
+          {{mlo?.primaryLocation.city}}, {{mlo?.primaryLocation.state}} {{mlo?.primaryLocation.zipCode}}</dd>
+      </div>
+    </dl>
+  </div>
+</div>
